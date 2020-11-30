@@ -1,0 +1,16 @@
+.main {
+    width: 1280px;
+    margin: 70px auto;
+}
+
+.navbar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.navbar-brand {
+    font-size: 30px;
+    color: #007bff;
+}
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.management.carrot97.mapper.UserMapper">
+    <!--  自定义映射规则  -->
+    <resultMap id="myUser" type="com.management.carrot97.bean.User">
+        <id property="userId" column="id"/>
+        <result property="userName" column="name"/>
+        <result property="birthday" column="birthday"/>
+        <result property="imgPath" column="img_path"/>
+        <result property="degree" column="degree"/>
+        <result property="email" column="email"/>
+        <result property="phoneNumber" column="phone"/>
+        <result property="privilege" column="privilege" javaType="com.management.carrot97.bean.Privilege"/>
+    </resultMap>
+
+    <!--    User getOneUserByEmail(String email);-->
+    <select id="getUserByEmail" resultMap="myUser">
+        select * from `user` where email=#{email} limit 1
+    </select>
+
+    <!--    User getOneUserByPhoneNumber(String phoneNumber);-->
+    <select id="getUserByPhoneNumber" resultMap="myUser">
+        select * from `user` where phone=#{phoneNumber} limit 1
+    </select>
+
+    <!--    void addOneUser(User user);-->
+    <insert id="addUser">
+        insert into `user`(name, password, birthday, img_path, degree, email, phone, privilege)
+        values (#{userName},#{password},#{birthday},#{imgPath},#{degree},#{email},#{phoneNumber},#{privilege})
+    </insert>
+
+
+</mapper>

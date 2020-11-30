@@ -1,0 +1,27 @@
+server:
+  port: 8080
+spring:
+  profiles:
+    active: prod
+  datasource:
+    username: "root"
+    password: "123456"
+    url: jdbc:mysql://localhost:3306/cxymanagement?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    filters: stat,wall,slf4j
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+
+#---
+#server:
+#  port: 8081
+#spring:
+#  profiles: dev
+#
+#---

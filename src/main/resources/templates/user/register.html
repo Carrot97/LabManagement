@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>注册 · 创新苑管理平台</title>
+    <th:block th:include="commons/header::header"/>
+    <link th:href="@{/assets/css/register.css}" rel="stylesheet">
+</head>
+<body>
+<!--导航栏-->
+<div th:replace="commons/base::navbar"></div>
+<div class="main">
+    <div class="register-box">
+        <div style="text-align: center; margin-bottom: 50px">
+            <h1>注册</h1>
+        </div>
+        <div class="left-box" style="text-align: right">
+            <br/>
+            <h4>姓名:</h4><br/>
+            <h4>密码:</h4><br/>
+            <h4>确认密码:</h4><br/>
+            <h4>学位:</h4><br/>
+            <h4>出生日期:</h4><br/>
+            <h4>电子邮箱:</h4><br/>
+            <h4>电话号码:</h4><br/>
+            <!--<h4>头像:</h4>-->
+        </div>
+        <div class="right-box">
+            <form class="form-register" th:action="@{/register}" method="post">
+                <!--用户名-->
+                <div class="form-group">
+                    <input type="text" name="username" class="form-control" id="inputName"
+                           placeholder="用户名" th:value="${user!=null?user.getUsername():''}">
+                </div>
+                <!--密码1-->
+                <div class="form-group">
+                    <input type="password" name="password1" class="form-control" id="inputPassword1"
+                           placeholder="密码">
+                </div>
+                <!-- 密码2-->
+                <div class="form-group">
+                    <input type="password" name="password2" class="form-control" id="inputPassword2"
+                           placeholder="确认密码">
+                </div>
+                <!--学位-->
+                <div class="form-group degree">
+                    <label class="radio-inline">
+                        <input type="radio" name="degree" id="inlineRadio1" value="BACHELOR"
+                               th:attr="checked=${user!=null && user.getDegree()!=null && user.getDegree().getDegreeId()==0?true:false}"> 学士
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="degree" id="inlineRadio2" value="MASTER"
+                               th:attr="checked=${user!=null && user.getDegree()!=null && user.getDegree().getDegreeId()==1?true:false}"> 硕士
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="degree" id="inlineRadio3" value="DOCTOR"
+                               th:attr="checked=${user!=null && user.getDegree()!=null && user.getDegree().getDegreeId()==2?true:false}"> 博士
+                    </label>
+                </div>
+                <!--生日-->
+                <div class="form-group">
+                    <input type="text" name="birthday" class="form-control" id="inputBirthday"
+                           placeholder="01-01(月-日)" th:value="${user!=null?user.getBirthday():''}">
+                </div>
+                <!--电子邮箱-->
+                <div class="form-group">
+                    <input type="email" name="email" class="form-control" id="inputEmail"
+                           placeholder="邮箱" th:value="${user!=null?user.getEmail():''}">
+                </div>
+                <!--电话号码-->
+                <div class="form-group">
+                    <input type="text" name="phoneNumber" class="form-control" id="inputNumber"
+                           placeholder="手机号" th:value="${user!=null?user.getPhoneNumber():''}">
+                </div>
+                <!--头像-->
+                <!--                <div class="form-group">-->
+                <!--                    <label for="exampleInputFile">上传文件</label>-->
+                <!--                    <input type="file" id="exampleInputFile" name="img">-->
+                <!--                    <p class="help-block"></p>-->
+                <!--                </div>-->
+                <button class="btn btn-primary" type="submit">注册</button>
+                <span id="msg" th:text="${msg}"></span>
+                <p class="mt-5 mb-3 text-muted text-center"></p>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
