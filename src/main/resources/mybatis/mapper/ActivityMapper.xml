@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.management.carrot97.mapper.ActivityMapper">
+    <resultMap id="BaseResultMap" type="com.management.carrot97.bean.Activity">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="host" jdbcType="INTEGER" property="host"/>
+        <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
+        <result column="span" jdbcType="INTEGER" property="span"/>
+        <result column="location" jdbcType="VARCHAR" property="location"/>
+        <result column="expense" jdbcType="DOUBLE" property="expense"/>
+        <result column="details" jdbcType="VARCHAR" property="details"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, host, start_time, span, location, expense, details
+  </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from activity
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+<!--    List<Activity> selectByPageInfo(@Param("start") Integer pageStart,-->
+<!--    @Param("end") Integer pageEnd);-->
+    <select id="selectByPageInfo" resultMap="BaseResultMap">
+        select *
+        from activity
+        where datediff(start_time, curdate()) >= 0
+        order by start_time asc
+        limit #{start}, #{end}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from activity
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+    <insert id="insert" parameterType="com.management.carrot97.bean.Activity">
+    insert into activity (id, name, host, 
+      start_time, span, location, 
+      expense, details)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{host,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{span,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}, 
+      #{expense,jdbcType=DOUBLE}, #{details,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.management.carrot97.bean.Activity">
+        insert into activity
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="host != null">
+                host,
+            </if>
+            <if test="startTime != null">
+                start_time,
+            </if>
+            <if test="span != null">
+                span,
+            </if>
+            <if test="location != null">
+                location,
+            </if>
+            <if test="expense != null">
+                expense,
+            </if>
+            <if test="details != null">
+                details,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="host != null">
+                #{host,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="span != null">
+                #{span,jdbcType=INTEGER},
+            </if>
+            <if test="location != null">
+                #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="expense != null">
+                #{expense,jdbcType=DOUBLE},
+            </if>
+            <if test="details != null">
+                #{details,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.management.carrot97.bean.Activity">
+        update activity
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="host != null">
+                host = #{host,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null">
+                start_time = #{startTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="span != null">
+                span = #{span,jdbcType=INTEGER},
+            </if>
+            <if test="location != null">
+                location = #{location,jdbcType=VARCHAR},
+            </if>
+            <if test="expense != null">
+                expense = #{expense,jdbcType=DOUBLE},
+            </if>
+            <if test="details != null">
+                details = #{details,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.management.carrot97.bean.Activity">
+    update activity
+    set name = #{name,jdbcType=VARCHAR},
+      host = #{host,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      span = #{span,jdbcType=INTEGER},
+      location = #{location,jdbcType=VARCHAR},
+      expense = #{expense,jdbcType=DOUBLE},
+      details = #{details,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,8 +1,12 @@
 package com.management.carrot97;
 
+import com.management.carrot97.bean.Activity;
 import com.management.carrot97.bean.OriginalUser;
+import com.management.carrot97.bean.Page;
 import com.management.carrot97.bean.User;
+import com.management.carrot97.mapper.ActivityMapper;
 import com.management.carrot97.mapper.UserMapper;
+import com.management.carrot97.service.ActivityService;
 import com.management.carrot97.service.UserService;
 import com.management.carrot97.utils.StringVerify;
 import com.management.carrot97.utils.Transformer;
@@ -14,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RunWith(SpringRunner.class)
@@ -21,22 +26,15 @@ import java.util.Map;
 public class Carrot97ApplicationTests {
 
     @Autowired
-    UserMapper userMapper;
+    ActivityMapper activityMapper;
 
     @Autowired
-    UserService userService;
+    ActivityService activityService;
 
     @Test
     public void contextLoads() {
-//        Map<String, Object> user = userService.verifyUser(new OriginalUser(
-//                                                        "李旭辉",
-//                                                        "123456",
-//                                                        "1234567",
-//                                                        "04-13",
-//                                                        1,
-//                                                        "1041217529@qq.com",
-//                                                        "18612099318"));
-//        System.out.println(user.toString());
+        List<Activity> activities = activityService.getPage(new Page(1, 5));
+        System.out.println(activities.toString());
     }
 
     @Test

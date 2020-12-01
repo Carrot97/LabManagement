@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>活动管理 · 创新苑</title>
+    <th:block th:include="commons/header::header"/>
+    <link th:href="@{/assets/css/list.css}" rel="stylesheet">
+</head>
+<body>
+<!--导航栏-->
+<div th:replace="commons/base::navbar"></div>
+<div class="main">
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <br/>
+        <h2 class="subtitle">活动列表</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>名称</th>
+                    <th>地点</th>
+                    <th>花费</th>
+                    <th>主办人</th>
+                    <th>开始时间</th>
+                    <th>预计时长</th>
+                    <th>详细</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="act:${activities}">
+                    <td th:text="${act.id}"></td>
+                    <td th:text="${act.name}"></td>
+                    <td th:text="${act.location}"></td>
+                    <td th:text="${act.expense}"></td>
+                    <td th:text="${act.host}"></td>
+                    <td th:text="${act.startTime.toString()}"></td>
+                    <td th:text="${act.span}"></td>
+                    <td th:text="${act.details}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+<script th:src="@{/assets/js/activity.js}"></script>
+</body>
+</html>

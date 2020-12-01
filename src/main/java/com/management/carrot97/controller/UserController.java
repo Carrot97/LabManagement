@@ -20,11 +20,13 @@ public class UserController {
     @Autowired
     UserService userService;
 
+
     /*获取登录页面*/
     @GetMapping(value = "/login")
     public String getLogin() {
         return "user/login";
     }
+
 
     /*提交登录页面*/
     @PostMapping(value = "/login")
@@ -38,7 +40,8 @@ public class UserController {
 //        System.out.println(user);
         if (user != null) {
             session.setAttribute("loginUser", user);
-            return "redirect:/main";
+            // 重定向至集体活动页面（主页面）默认页码1，每页5条
+            return "redirect:/activities?pageNumber=1&pageSize=5";
         } else {
             // 回显错误信息
             map.put("msg", "用户名或密码错误");
@@ -47,11 +50,14 @@ public class UserController {
         }
     }
 
+
     /*获取注册页面*/
     @GetMapping(value = "/register")
     public String getRegister() {
         return "user/register";
     }
+
+
 
     /**
      * 提交注册页面

@@ -1,86 +1,49 @@
 package com.management.carrot97.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Activity {
-    // 活动唯一id
-    private final Integer activityId;
+public class Activity implements Serializable {
+    private Integer id;
 
-    // 活动名称
-    private String activityName;
+    private String name;
 
-    // 组织者
-    private Integer hostId;
+    private Integer host;
 
-    // 开始日期时间
     private Date startTime;
 
-    // 持续时长（分钟）
     private Integer span;
 
-    // 活动地点
     private String location;
 
-    // 预计活动花费
     private Double expense;
 
-    // 细节描述
     private String details;
 
-    public Activity(Integer activityId, String activityName, Integer hostId, Date startTime, Integer span, String location, Double expense, String details) {
-        this.activityId = activityId;
-        this.activityName = activityName;
-        this.hostId = hostId;
-        this.startTime = startTime;
-        this.span = span;
-        this.location = location;
-        this.expense = expense;
-        this.details = details;
+    private static final long serialVersionUID = 1L;
+
+    public Integer getId() {
+        return id;
     }
 
-    public Activity(String activityName, Integer hostId, Date startTime, Integer span, String location, Double expense, String details) {
-        this(null,
-                activityName,
-                hostId,
-                startTime,
-                span,
-                location,
-                expense,
-                details);
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "Activity{" +
-                "activityId=" + activityId +
-                ", activityName='" + activityName + '\'' +
-                ", hostId=" + hostId +
-                ", startTime=" + startTime +
-                ", span=" + span +
-                ", location='" + location + '\'' +
-                ", expense=" + expense +
-                ", details='" + details + '\'' +
-                '}';
+    public String getName() {
+        return name;
     }
 
-    public Integer getActivityId() {
-        return activityId;
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
-    public String getActivityName() {
-        return activityName;
+    public Integer getHost() {
+        return host;
     }
 
-    public void setActivityName(String activityName) {
-        this.activityName = activityName;
-    }
-
-    public Integer getHostId() {
-        return hostId;
-    }
-
-    public void setHostId(Integer hostId) {
-        this.hostId = hostId;
+    public void setHost(Integer host) {
+        this.host = host;
     }
 
     public Date getStartTime() {
@@ -104,7 +67,7 @@ public class Activity {
     }
 
     public void setLocation(String location) {
-        this.location = location;
+        this.location = location == null ? null : location.trim();
     }
 
     public Double getExpense() {
@@ -120,6 +83,62 @@ public class Activity {
     }
 
     public void setDetails(String details) {
-        this.details = details;
+        this.details = details == null ? null : details.trim();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+        if (this == that) {
+            return true;
+        }
+        if (that == null) {
+            return false;
+        }
+        if (getClass() != that.getClass()) {
+            return false;
+        }
+        Activity other = (Activity) that;
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+            && (this.getHost() == null ? other.getHost() == null : this.getHost().equals(other.getHost()))
+            && (this.getStartTime() == null ? other.getStartTime() == null : this.getStartTime().equals(other.getStartTime()))
+            && (this.getSpan() == null ? other.getSpan() == null : this.getSpan().equals(other.getSpan()))
+            && (this.getLocation() == null ? other.getLocation() == null : this.getLocation().equals(other.getLocation()))
+            && (this.getExpense() == null ? other.getExpense() == null : this.getExpense().equals(other.getExpense()))
+            && (this.getDetails() == null ? other.getDetails() == null : this.getDetails().equals(other.getDetails()));
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((getHost() == null) ? 0 : getHost().hashCode());
+        result = prime * result + ((getStartTime() == null) ? 0 : getStartTime().hashCode());
+        result = prime * result + ((getSpan() == null) ? 0 : getSpan().hashCode());
+        result = prime * result + ((getLocation() == null) ? 0 : getLocation().hashCode());
+        result = prime * result + ((getExpense() == null) ? 0 : getExpense().hashCode());
+        result = prime * result + ((getDetails() == null) ? 0 : getDetails().hashCode());
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", name=").append(name);
+        sb.append(", host=").append(host);
+        sb.append(", startTime=").append(startTime);
+        sb.append(", span=").append(span);
+        sb.append(", location=").append(location);
+        sb.append(", expense=").append(expense);
+        sb.append(", details=").append(details);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
     }
 }
