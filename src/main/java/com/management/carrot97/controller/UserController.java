@@ -35,7 +35,7 @@ public class UserController {
 //        System.out.println("收到登录请求");
         // 通过账号密码取出用户，取失败则返回null
         User user = userService.checkNameOrPwd(username, password);
-        System.out.println(user);
+//        System.out.println(user);
         if (user != null) {
             session.setAttribute("loginUser", user);
             return "redirect:/main";
