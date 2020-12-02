@@ -5,6 +5,8 @@ public class StringConstants {
 
     public static final String ERRORMESSAGE = "details";
 
+    public static final String LOGINUSER = "loginUser";
+
     public static final String TRANSFORMERROR = "用户转换失败,请联系作者";
 
     public static final String ADDFAILED = "注册失败，请联系作者";

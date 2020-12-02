@@ -39,7 +39,7 @@ public class UserController {
         User user = userService.checkNameOrPwd(username, password);
 //        System.out.println(user);
         if (user != null) {
-            session.setAttribute("loginUser", user);
+            session.setAttribute(StringConstants.LOGINUSER, user);
             // 重定向至集体活动页面（主页面）默认页码1，每页5条
             return "redirect:/activities?pageNumber=1&pageSize=5";
         } else {
@@ -48,6 +48,16 @@ public class UserController {
             map.put("username", username);
             return "user/login";
         }
+    }
+
+
+    /*注销操作*/
+    @GetMapping(value = "/logout")
+    public String logout(HttpSession session) {
+        if (session.getAttribute(StringConstants.LOGINUSER) != null) {
+            session.removeAttribute(StringConstants.LOGINUSER);
+        }
+        return "redirect:/activities?pageNumber=1&pageSize=5";
     }
 
 

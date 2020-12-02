@@ -38,7 +38,7 @@
 
 .left-box {
     float: left;
-    width: 640px;
+    width: 500px;
     border-right: 1px solid #b3b3b3;
 }
 
@@ -49,7 +49,7 @@
 
 .right-box {
     float: right;
-    width: 640px;
+    width: 500px;
 }
 
 .bottom-box {
