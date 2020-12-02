@@ -22,6 +22,9 @@
     z-index: 2;
 }
 
+.main {
+    height: 750px;
+}
 
 #msg {
     color: red;
@@ -29,8 +32,8 @@
 }
 
 .login-box {
-    position: relative;
-    margin-top: 150px;
+    position: absolute;
+    margin-top: 100px;
 }
 
 .left-box {

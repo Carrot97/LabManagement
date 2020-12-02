@@ -1,6 +1,6 @@
 package com.management.carrot97.bean;
 
-import java.util.Date;
+import java.sql.Date;
 
 
 public class User {

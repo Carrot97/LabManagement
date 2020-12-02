@@ -32,14 +32,18 @@
     z-index: 2;
 }
 
+.main {
+    height: 750px;
+}
+
 #msg {
     color: red;
     float: right;
 }
 
 .register-box {
-    position: relative;
-    margin-top: 100px;
+    position: absolute;
+    margin-top: 50px;
 }
 
 .left-box {
