@@ -12,7 +12,7 @@
 </head>
 <body>
 <!--导航栏-->
-<div th:replace="commons/base::navbar"></div>
+<div th:replace="commons/base::navbar(activeUri='activity')"></div>
 <div class="main">
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
         <br/>
@@ -47,11 +47,6 @@
         </div>
     </main>
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <script th:src="@{/assets/js/activity.js}"></script>
 </body>
 </html>

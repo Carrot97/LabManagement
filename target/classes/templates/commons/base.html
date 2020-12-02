@@ -22,8 +22,11 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav main-nav">
-                <li><a th:href="@{/activities(pageNumber=1,pageSize=5)}">集体活动 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">事件通知 </a></li>
+                <li th:class="${activeUri=='activity'?'active':''}">
+                    <a th:href="@{/activities(pageNumber=1,pageSize=5)}">
+                        集体活动</a></li>
+                <li th:class="${activeUri=='event'?'active':''}">
+                    <a href="#">事件通知 </a></li>
                 <li><a href="#">集体账单</a></li>
                 <li><a href="#">个人账单</a></li>
             </ul>
