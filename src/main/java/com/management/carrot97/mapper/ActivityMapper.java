@@ -16,6 +16,8 @@ public interface ActivityMapper {
 
     Activity selectByPrimaryKey(Integer id);
 
+    List<Activity> selectRecent();
+
     List<Activity> selectByPageInfo(@Param("start") Integer numberStart,
                                     @Param("end") Integer numberEnd);
 

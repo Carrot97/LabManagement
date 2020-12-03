@@ -26,9 +26,16 @@
     <select id="selectByPageInfo" resultMap="BaseResultMap">
         select *
         from activity
-        where datediff(start_time, curdate()) >= 0
         order by start_time asc
         limit #{start}, #{end}
+    </select>
+<!--    List<Activity> selectRecent();-->
+    <select id="selectRecent" resultMap="BaseResultMap">
+        select *
+        from activity
+        where datediff(start_time, curdate()) >= 0
+        order by start_time asc
+        limit 10
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

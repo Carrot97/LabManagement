@@ -20,4 +20,9 @@ public class ActivityService {
                 page.getNumberStart() + page.getPageSize());
         return activities;
     }
+
+    public List<Activity> getRecent() {
+        List<Activity> activities = activityMapper.selectRecent();
+        return activities;
+    }
 }

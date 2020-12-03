@@ -41,7 +41,7 @@ public class UserController {
         if (user != null) {
             session.setAttribute(StringConstants.LOGINUSER, user);
             // 重定向至集体活动页面（主页面）默认页码1，每页5条
-            return "redirect:/activities?pageNumber=1&pageSize=5";
+            return "redirect:/activity/recent";
         } else {
             // 回显错误信息
             map.put("msg", "用户名或密码错误");
@@ -57,7 +57,7 @@ public class UserController {
         if (session.getAttribute(StringConstants.LOGINUSER) != null) {
             session.removeAttribute(StringConstants.LOGINUSER);
         }
-        return "redirect:/activities?pageNumber=1&pageSize=5";
+        return "redirect:/activity/recent";
     }
 
 

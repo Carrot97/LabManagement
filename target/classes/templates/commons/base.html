@@ -22,11 +22,21 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav main-nav">
-                <li th:class="${activeUri=='activity'?'active':''}">
-                    <a th:href="@{/activities(pageNumber=1,pageSize=5)}">
-                        集体活动</a></li>
+                <li th:class="${activeUri=='activity'?'active dropdown':'dropdown'}">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">集体活动 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/activity/recent}">
+                            最近活动</a></li>
+                        <li><a th:href="@{/activity/all(pageNumber=1,pageSize=5)}">
+                            全部活动</a></li>
+                        <li><a href="#">我的活动</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">发布活动</a></li>
+                    </ul>
+                </li>
                 <li th:class="${activeUri=='event'?'active':''}">
-                    <a href="#">事件通知 </a></li>
+                    <a href="#">事件通知</a></li>
                 <li><a href="#">集体账单</a></li>
             </ul>
             <form class="navbar-form navbar-left">
