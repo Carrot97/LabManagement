@@ -1,0 +1,52 @@
+.main {
+    height: 250px;
+}
+
+.main .headtop {
+    position: relative;
+    top: 0;
+    width: 1000px;
+    height: 140px;
+    background: #919191;
+    z-index: 998;
+}
+
+.main .headbot {
+    position: relative;
+    bottom: 0;
+    width: 1000px;
+    height: 110px;
+    background: white;
+}
+
+.portrait {
+    position: absolute;
+    margin-left: 30px;
+    margin-top: 70px;
+    width: 160px;
+    height: 160px;
+    /*浮动*/
+    display: flex;
+    /*层叠优先级*/
+    z-index: 999;
+    background: white;
+}
+
+.username {
+    position: relative;
+    margin-left: 225px;
+    margin-top: 15px;
+    font-weight: 900;
+}
+
+.sub-main {
+    margin-top: 20px;
+    width: 1000px;
+    height: 300px;
+    background: white;
+    padding: 15px 20px;
+}
+
+.sub-main .nav-tabs a {
+    font-weight: 550;
+}

@@ -26,8 +26,20 @@ body {
 }
 
 .shadow {
-    box-shadow: -5px 0 5px #f0f0f0, /*左边阴影*/
-                5px 0 5px #f0f0f0, /*右边阴影*/
-                /*0 -10px 10px #f1f1f1, !*顶部阴影*!*/
-                0 5px 5px #f0f0f0; /*底边阴影*/
+    box-shadow: -5px 0 5px #f0f0f0,
+                5px 0 5px #f0f0f0,
+                /*0 -10px 10px #f1f1f1,*/
+                0 5px 5px #f0f0f0;
+}
+
+.shadow-white {
+    box-shadow: 0 0 0 5px white
+}
+
+.angle-rounded {
+    border-radius:3px 3px 3px 3px
+}
+
+.angle-rounded-up {
+    border-radius:3px 3px 0 0
 }

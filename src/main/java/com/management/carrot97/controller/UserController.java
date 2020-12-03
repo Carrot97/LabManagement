@@ -95,5 +95,8 @@ public class UserController {
         }
     }
 
-
+    @GetMapping(value = "/me")
+    public String personalCenter() {
+        return "user/me";
+    }
 }
