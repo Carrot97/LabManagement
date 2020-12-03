@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.management.carrot97.bean.Activity">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="host" jdbcType="INTEGER" property="host"/>
+        <result column="host" jdbcType="VARCHAR" property="host"/>
         <result column="start_time" jdbcType="TIMESTAMP" property="startTime"/>
         <result column="span" jdbcType="INTEGER" property="span"/>
         <result column="location" jdbcType="VARCHAR" property="location"/>
@@ -47,7 +47,7 @@
     insert into activity (id, name, host, 
       start_time, span, location, 
       expense, details)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{host,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{host,jdbcType=VARCHAR},
       #{startTime,jdbcType=TIMESTAMP}, #{span,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}, 
       #{expense,jdbcType=DOUBLE}, #{details,jdbcType=VARCHAR})
   </insert>
@@ -87,7 +87,7 @@
                 #{name,jdbcType=VARCHAR},
             </if>
             <if test="host != null">
-                #{host,jdbcType=INTEGER},
+                #{host,jdbcType=VARCHAR},
             </if>
             <if test="startTime != null">
                 #{startTime,jdbcType=TIMESTAMP},
@@ -113,7 +113,7 @@
                 name = #{name,jdbcType=VARCHAR},
             </if>
             <if test="host != null">
-                host = #{host,jdbcType=INTEGER},
+                host = #{host,jdbcType=VARCHAR},
             </if>
             <if test="startTime != null">
                 start_time = #{startTime,jdbcType=TIMESTAMP},
@@ -136,7 +136,7 @@
     <update id="updateByPrimaryKey" parameterType="com.management.carrot97.bean.Activity">
     update activity
     set name = #{name,jdbcType=VARCHAR},
-      host = #{host,jdbcType=INTEGER},
+      host = #{host,jdbcType=VARCHAR},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       span = #{span,jdbcType=INTEGER},
       location = #{location,jdbcType=VARCHAR},

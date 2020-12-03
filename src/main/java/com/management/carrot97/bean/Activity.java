@@ -1,6 +1,5 @@
 package com.management.carrot97.bean;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,7 +8,7 @@ public class Activity implements Serializable {
 
     private String name;
 
-    private Integer host;
+    private String host;
 
     private Date startTime;
 
@@ -39,11 +38,11 @@ public class Activity implements Serializable {
         this.name = name == null ? null : name.trim();
     }
 
-    public Integer getHost() {
+    public String getHost() {
         return host;
     }
 
-    public void setHost(Integer host) {
+    public void setHost(String host) {
         this.host = host;
     }
 
