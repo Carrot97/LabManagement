@@ -3,6 +3,7 @@ package com.management.carrot97.service;
 import com.management.carrot97.bean.Activity;
 import com.management.carrot97.bean.Page;
 import com.management.carrot97.mapper.ActivityMapper;
+import com.management.carrot97.utils.Transformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

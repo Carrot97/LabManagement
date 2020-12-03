@@ -26,7 +26,7 @@
     <select id="selectByPageInfo" resultMap="BaseResultMap">
         select *
         from activity
-        order by start_time asc
+        order by start_time desc
         limit #{start}, #{end}
     </select>
 <!--    List<Activity> selectRecent();-->

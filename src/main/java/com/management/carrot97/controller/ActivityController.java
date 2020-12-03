@@ -30,7 +30,6 @@ public class ActivityController {
                                 Map<String, Object> map) {
         List<Activity> activities = activityService.getPage(page);
         map.put("activities", activities);
-        return "activity/recent";
+        return "activity/all";
     }
-
 }

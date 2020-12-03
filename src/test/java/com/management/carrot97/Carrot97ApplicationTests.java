@@ -33,8 +33,10 @@ public class Carrot97ApplicationTests {
 
     @Test
     public void contextLoads() {
-        List<Activity> activities = activityService.getPage(new Page(1, 5));
-        System.out.println(activities.toString());
+//        List<Activity> activities = activityService.getPage(new Page(1, 5));
+//        System.out.println(activities.toString());
+        List<Activity> serviceRecent = activityService.getRecent();
+        System.out.println(serviceRecent.toString());
     }
 
     @Test

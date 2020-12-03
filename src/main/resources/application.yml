@@ -3,6 +3,9 @@ server:
 spring:
   profiles:
     active: prod
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
   datasource:
     username: "root"
     password: "123456"
