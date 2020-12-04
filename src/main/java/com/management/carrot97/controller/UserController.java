@@ -1,5 +1,6 @@
 package com.management.carrot97.controller;
 
+import com.management.carrot97.bean.Activity;
 import com.management.carrot97.bean.OriginalUser;
 import com.management.carrot97.bean.User;
 import com.management.carrot97.constant.StringConstants;
@@ -10,8 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.thymeleaf.util.StringUtils;
+
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -22,14 +24,14 @@ public class UserController {
 
 
     /*获取登录页面*/
-    @GetMapping(value = "/login")
+    @GetMapping(value = "/user/login")
     public String getLogin() {
         return "user/login";
     }
 
 
     /*提交登录页面*/
-    @PostMapping(value = "/login")
+    @PostMapping(value = "/user/login")
     public String postLogin(@RequestParam("username") String username,
                             @RequestParam("password") String password,
                             Map<String, Object> map,
@@ -52,7 +54,7 @@ public class UserController {
 
 
     /*注销操作*/
-    @GetMapping(value = "/logout")
+    @GetMapping(value = "/user/logout")
     public String logout(HttpSession session) {
         if (session.getAttribute(StringConstants.LOGINUSER) != null) {
             session.removeAttribute(StringConstants.LOGINUSER);
@@ -62,7 +64,7 @@ public class UserController {
 
 
     /*获取注册页面*/
-    @GetMapping(value = "/register")
+    @GetMapping(value = "/user/register")
     public String getRegister() {
         return "user/register";
     }
@@ -75,7 +77,7 @@ public class UserController {
      * 2.判断反馈信息为成功，则重定向至登录页面
      * 3.若不成功则返回注册页面，并回显用户和错误信息
      */
-    @PostMapping(value = "/register")
+    @PostMapping(value = "/user/register")
     public String PostRegister(OriginalUser originalUser,
                                Map<String, Object> map) {
 //        System.out.println(originalUser);
@@ -84,19 +86,27 @@ public class UserController {
         // 2.若返回状态为成功，则重定向至登录页面
         if (msg.get(StringConstants.VERIFYSTATUS).equals(BooleanConstants.AVAILABLE)) {
 //            System.out.println("添加成功");
-            map.put("msg", "注册成功，请登录");
             return "redirect:/login";
         } else {
 //            3.若不成功则返回注册页面，并回显用户和错误信息
 //            System.out.println("添加失败，错误信息" + msg.toString());
-            map.put("msg", msg.get("details"));
+            map.put("msg", msg.get(StringConstants.ERRORMESSAGE));
             map.put("user", originalUser);
             return "user/register";
         }
     }
 
-    @GetMapping(value = "/me")
-    public String personalCenter() {
-        return "user/me";
+
+    /**
+     * 1.点击主导航栏‘个人中心’默认进入我的活动
+     * 2.点击次级导航栏‘我的活动’进入我的活动
+     */
+    @GetMapping(value = "/user/activity")
+    public String personalCenter(Map<String, Object> map,
+                                 HttpSession session) {
+        User loginUser = (User) session.getAttribute(StringConstants.LOGINUSER);
+//        List<Activity> activities = activityService.getPage(page);
+//        map.put("activities", activities);
+        return "user/activity";
     }
 }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心 · 创新苑</title>
+    <th:block th:include="commons/header::header"/>
+    <link th:href="@{/assets/css/me.css}" rel="stylesheet">
+</head>
+<body>
+<!--导航栏-->
+<div th:replace="commons/base::navbar"></div>
+
+<div class="main">
+    <div th:fragment="visitingCard">
+        <img class="portrait shadow-white angle-rounded" width="160" height="160"
+             th:src="@{/assets/img/user-1.jpg}">
+        <div class="headtop angle-rounded-up"></div>
+        <div class="headbot angle-rounded shadow">
+<!--            <h2 class="username" th:text="${session.loginUser.userName}"></h2>-->
+        </div>
+    </div>
+    <div class="sub-main angle-rounded shadow">
+        <div class="sub-nav" th:fragment="subnavber">
+            <ul class="nav nav-tabs">
+                <li role="presentation" th:class="${subActiveUri=='myActivity'?'active':''}">
+                    <a href="#">我的活动</a></li>
+                <li role="presentation" th:class="${subActiveUri=='myBill'?'active':''}">
+                    <a href="#">我的帐单</a></li>
+                <li role="presentation" th:class="${subActiveUri=='personalData'?'active':''}">
+                    <a href="#">个人资料</a></li>
+            </ul>
+        </div>
+        <!--        <hr style="background-color: #a7a7a7; height: 1px;border: none"/>-->
+    </div>
+</div>
+</body>
+</html>

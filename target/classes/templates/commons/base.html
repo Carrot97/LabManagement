@@ -6,7 +6,7 @@
 </head>
 <body>
 <nav class="navbar navbar-default" th:fragment="navbar">
-    <div class="container-fluid shadow" style="padding: 0 460px">
+    <div class="container-fluid shadow" style="padding: 0 24%">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -46,14 +46,14 @@
                 <button type="submit" class="btn btn-primary">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right" th:if="${session.loginUser==null}">
-                <li><a th:href="@{/login}">登录</a></li>
-                <li><a th:href="@{/register}">注册</a></li>
+                <li><a th:href="@{/user/login}">登录</a></li>
+                <li><a th:href="@{/user/register}">注册</a></li>
                 <!--                <li><a href="#">个人中心</a></li>-->
                 <!--                <li><a href="#">注销</a></li>-->
             </ul>
             <ul class="nav navbar-nav navbar-right" th:if="${session.loginUser!=null}">
-                <li><a th:href="@{/me}">个人中心</a></li>
-                <li><a th:href="@{/logout}">注销</a></li>
+                <li><a th:href="@{/user/activity}">个人中心</a></li>
+                <li><a th:href="@{/user/logout}">注销</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

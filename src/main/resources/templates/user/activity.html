@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心 · 创新苑</title>
+    <th:block th:include="commons/header::header"/>
+    <link th:href="@{/assets/css/me.css}" rel="stylesheet">
+    <link th:href="@{/assets/css/activity.css}" rel="stylesheet">
+</head>
+<body>
+<!--导航栏-->
+<div th:replace="commons/base::navbar"></div>
+
+<div class="main">
+    <!--用户名片-->
+    <div th:replace="commons/me::visitingCard"></div>
+    <div class="sub-main angle-rounded shadow">
+        <!--次级导航栏-->
+        <div th:replace="commons/me::subnavber(subActiveUri='myActivity')"></div>
+        <!--活动表格-->
+        <div class="table-box">
+            <div th:replace="commons/activity_table::activity_table"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

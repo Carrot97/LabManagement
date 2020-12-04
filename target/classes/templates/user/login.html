@@ -21,7 +21,7 @@
         </div>
         <div class="right-box">
             <span id="msg" th:text="${msg}"></span>
-            <form class="form-signin" th:action="@{/login}" method="post">
+            <form class="form-signin" th:action="@{/user/login}" method="post">
                 <div class="form-group">
                     <input type="text" name="username" class="form-control" id="inputName"
                            placeholder="手机号/邮箱" th:value="${username}">
