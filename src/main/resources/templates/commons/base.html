@@ -30,7 +30,8 @@
                             最近活动</a></li>
                         <li><a th:href="@{/activity/all(pageNumber=1,pageSize=5)}">
                             全部活动</a></li>
-                        <li><a href="#">我的活动</a></li>
+                        <li><a th:href="@{/activity/user(pageNumber=1,pageSize=5)}">
+                            我的活动</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a th:href="@{/activity/add}">发布活动</a></li>
                     </ul>

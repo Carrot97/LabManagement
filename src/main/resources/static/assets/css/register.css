@@ -1,4 +1,4 @@
-.form-add {
+.form-register {
     width: 100%;
     max-width: 350px;;
     padding: 15px;
@@ -6,11 +6,11 @@
     margin-top: 6px;
 }
 
-.form-add .checkbox {
+.form-register .checkbox {
     font-weight: 400;
 }
 
-.form-add .form-control {
+.form-register .form-control {
     position: relative;
     box-sizing: border-box;
     height: 35px;
@@ -24,11 +24,11 @@
     height: 30px;
 }
 
-.form-add .form-group {
+.form-register .form-group {
     margin-bottom: 24px;
 }
 
-.form-add .form-control:focus {
+.form-register .form-control:focus {
     z-index: 2;
 }
 
