@@ -24,6 +24,7 @@ public class UserService {
      * 1.验证用户信息的可用性（合法和是否被占用）
      * 2.若验证成功则进行类型转换（原始用户->用户），转换失败回显错误信息
      * 3.验证成功则添加用户，添加失败回显错误信息
+     * Map中返回添加状态（成功或失败）和失败信息
      */
     public Map<String, Object> verifyAndAddUser(OriginalUser oUser) {
         // 验证用户信息的可用性
@@ -51,14 +52,13 @@ public class UserService {
     }
 
     public Map<String, Object> verifyUser(OriginalUser oUser) {
-        boolean isError = false;
         Map<String, Object> msg = new HashMap<>();
         msg.put(StringConstants.VERIFYSTATUS, BooleanConstants.UNAVAILABLE);
         // 验证用户名
         // 验证合法性（2-4字中文）
         if (!msg.containsKey(StringConstants.ERRORMESSAGE)
                 && !StringVerify.verifyName(oUser.getUsername())) {
-            msg.put(StringConstants.ERRORMESSAGE, StringConstants.ILLEGALNAME);
+            msg.put(StringConstants.ERRORMESSAGE, StringConstants.ILLEGALUSERNAME);
         }
 
         // 验证密码

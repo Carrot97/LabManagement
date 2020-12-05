@@ -51,3 +51,8 @@
     float: right;
     width: 600px;
 }
+
+#msg {
+    color: red;
+    float: right;
+}

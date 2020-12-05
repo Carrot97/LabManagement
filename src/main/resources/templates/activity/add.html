@@ -29,34 +29,35 @@
                 <!--活动名称-->
                 <div class="form-group">
                     <input type="text" name="name" class="form-control" id="inputName"
-                           placeholder="活动名称">
+                           placeholder="活动名称" th:value="${activity!=null?activity.name:''}">
                 </div>
                 <!--活动地点-->
                 <div class="form-group">
                     <input type="text" name="location" class="form-control" id="inputLocation"
-                           placeholder="活动地点">
+                           placeholder="活动地点" th:value="${activity!=null?activity.location:''}">
                 </div>
                 <!--开始时间-->
                 <div class="form-group">
                     <input type="text" name="startTime" class="form-control" id="inputStartTime"
-                           placeholder="开始时间">
+                           placeholder="开始时间(2020-01-01 17:00:00)" th:value="${activity!=null?#dates.format(activity.startTime, 'yyyy-MM-dd HH:mm:ss'):''}">
                 </div>
                 <!--预计耗时-->
                 <div class="form-group">
                     <input type="number" name="span" class="form-control" id="inputSpan"
-                           placeholder="预计耗时">
+                           placeholder="预计耗时" th:value="${activity!=null?activity.span:''}">
                 </div>
                 <!--预计花费-->
                 <div class="form-group">
                     <input type="number" name="expense" class="form-control" id="inputExpense"
-                           placeholder="预计花费">
+                           placeholder="预计花费" th:value="${activity!=null?activity.expense:''}">
                 </div>
                 <!--细节描述-->
                 <div class="form-group">
-                    <textarea name="details" rows="10" class="form-control" style="height:105px;overflow:auto"></textarea>
+                    <textarea name="details" rows="10" class="form-control" style="height:105px;overflow:auto"
+                              th:text="${activity!=null?activity.details:''}"></textarea>
                 </div>
                 <button class="btn btn-primary" type="submit">发布</button>
-<!--                <span id="msg" th:text="${msg}"></span>-->
+                <span id="msg" th:text="${msg}"></span>
 <!--                <p class="mt-5 mb-3 text-muted text-center"></p>-->
             </form>
         </div>

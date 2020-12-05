@@ -6,6 +6,11 @@ public class StringVerify {
         return "".equals(str);
     }
 
+    // 判断字符串是否为空或空串
+    public static boolean isNullOrEmpty(String str) {
+        return str == null || "".equals(str);
+    }
+
     // 验证密码合法性（包含 数字,英文,字符中的两种以上，长度6-20）
     public static boolean verifyPassword(String password) {
         boolean result = false;

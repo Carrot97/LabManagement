@@ -3,6 +3,7 @@ package com.management.carrot97.controller;
 import com.management.carrot97.bean.Activity;
 import com.management.carrot97.bean.Page;
 import com.management.carrot97.bean.User;
+import com.management.carrot97.constant.BooleanConstants;
 import com.management.carrot97.constant.StringConstants;
 import com.management.carrot97.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,11 +62,22 @@ public class ActivityController {
         return "activity/add";
     }
 
+
     /*提交发布活动表单*/
     @PostMapping(value = "/activity")
-    public String addActivity(Activity activity) {
+    public String addActivity(Activity activity,
+                              Map<String, Object> map) {
+        Map<String, Object> msg = activityService.verifyAndAdd(activity);
         System.out.println(activity);
-        return "redirect:/activity/recent";
+        if (BooleanConstants.AVAILABLE.equals(msg.get(StringConstants.VERIFYSTATUS))) {
+            // 添加成功返回主页面
+            return "redirect:/activity/recent";
+        } else {
+            // 添加失败回显活动信息和错误信息
+            map.put("msg", msg.get(StringConstants.ERRORMESSAGE));
+            map.put("activity", activity);
+            return "activity/add";
+        }
     }
 
 }
