@@ -26,6 +26,9 @@
     <select id="selectByPageInfo" resultMap="BaseResultMap">
         select *
         from activity
+        <if test="username != null">
+            where host = #{username}
+        </if>
         order by start_time desc
         limit #{start}, #{end}
     </select>

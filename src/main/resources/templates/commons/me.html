@@ -16,14 +16,14 @@
              th:src="@{/assets/img/user-1.jpg}">
         <div class="headtop angle-rounded-up"></div>
         <div class="headbot angle-rounded shadow">
-<!--            <h2 class="username" th:text="${session.loginUser.userName}"></h2>-->
+            <h2 class="username" th:text="${session.loginUser.userName}"></h2>
         </div>
     </div>
     <div class="sub-main angle-rounded shadow">
         <div class="sub-nav" th:fragment="subnavber">
             <ul class="nav nav-tabs">
                 <li role="presentation" th:class="${subActiveUri=='myActivity'?'active':''}">
-                    <a href="#">我的活动</a></li>
+                    <a th:href="@{/activity/user(pageNumber=1,pageSize=5)}">我的活动</a></li>
                 <li role="presentation" th:class="${subActiveUri=='myBill'?'active':''}">
                     <a href="#">我的帐单</a></li>
                 <li role="presentation" th:class="${subActiveUri=='personalData'?'active':''}">

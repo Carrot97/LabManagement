@@ -95,18 +95,4 @@ public class UserController {
             return "user/register";
         }
     }
-
-
-    /**
-     * 1.点击主导航栏‘个人中心’默认进入我的活动
-     * 2.点击次级导航栏‘我的活动’进入我的活动
-     */
-    @GetMapping(value = "/user/activity")
-    public String personalCenter(Map<String, Object> map,
-                                 HttpSession session) {
-        User loginUser = (User) session.getAttribute(StringConstants.LOGINUSER);
-//        List<Activity> activities = activityService.getPage(page);
-//        map.put("activities", activities);
-        return "user/activity";
-    }
 }

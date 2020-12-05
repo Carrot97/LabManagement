@@ -19,7 +19,8 @@ public interface ActivityMapper {
     List<Activity> selectRecent();
 
     List<Activity> selectByPageInfo(@Param("start") Integer numberStart,
-                                    @Param("end") Integer numberEnd);
+                                    @Param("end") Integer numberEnd,
+                                    @Param("username") String username);
 
     int updateByPrimaryKeySelective(Activity record);
 

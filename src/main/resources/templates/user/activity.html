@@ -17,6 +17,13 @@
     <div class="sub-main angle-rounded shadow">
         <!--次级导航栏-->
         <div th:replace="commons/me::subnavber(subActiveUri='myActivity')"></div>
+        <div class="button-box">
+            <ul>
+                <li><a class="btn btn-success" th:href="@{/activity/add}">发布活动</a></li>
+                <li><a class="btn btn-warning" >修改活动</a></li>
+                <li><a class="btn btn-danger" >删除活动</a></li>
+            </ul>
+        </div>
         <!--活动表格-->
         <div class="table-box">
             <div th:replace="commons/activity_table::activity_table"></div>

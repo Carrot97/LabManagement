@@ -18,12 +18,6 @@
     font-size: 14px;
 }
 
-.degree {
-    margin-top: 30px;
-    margin-bottom: 35px;
-    height: 30px;
-}
-
 .form-add .form-group {
     margin-bottom: 24px;
 }
@@ -36,12 +30,7 @@
     height: 750px;
 }
 
-#msg {
-    color: red;
-    float: right;
-}
-
-.register-box {
+.add-box {
     position: absolute;
     margin-top: 50px;
 }
