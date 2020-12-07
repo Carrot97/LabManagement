@@ -19,6 +19,14 @@ public class ActivityService {
     @Autowired
     ActivityMapper activityMapper;
 
+
+    /*********************************基本操作类型*******************************/
+    // 按照指定id获取一个活动
+    public Activity getActivity(Integer id) {
+        Activity activity = activityMapper.selectByPrimaryKey(id);
+        return activity;
+    }
+
     // 获取指定用户的分页
     // 若未指定则获取全部活动的分页
     public List<Activity> getPage(Page page, String username) {
@@ -33,30 +41,19 @@ public class ActivityService {
         return activities;
     }
 
-    /**
-     * 验证并添加活动
-     * 1.验证活动（验证数据库中not null字段非空）
-     * 2.添加活动
-     * Map中返回添加状态（成功或失败）和失败信息
-     */
-    public Map<String, Object> verifyAndAdd(Activity activity) {
-        // 验证活动
-        Map<String, Object> msg = verifyActivity(activity);
-        if (msg.get(StringConstants.VERIFYSTATUS).equals(BooleanConstants.AVAILABLE)) {
-            // 验证通过添加活动
-            if (addActivity(activity) != 1) {
-                msg.put(StringConstants.VERIFYSTATUS, BooleanConstants.UNAVAILABLE);
-                msg.put(StringConstants.ERRORMESSAGE, StringConstants.ADDFAILED);
-            }
-        }
-        return msg;
-    }
-
+    // 添加活动
     private int addActivity(Activity activity) {
         int result = activityMapper.insertSelective(activity);
         return result;
     }
 
+    // 更新活动
+    private int updateActivity(Activity activity) {
+        int result = activityMapper.updateByPrimaryKey(activity);
+        return result;
+    }
+
+    // 验证活动信息可用性
     private Map<String, Object> verifyActivity(Activity activity) {
         HashMap<String, Object> msg = new HashMap<>();
         msg.put(StringConstants.VERIFYSTATUS, BooleanConstants.AVAILABLE);
@@ -80,6 +77,45 @@ public class ActivityService {
                 && StringVerify.isNullOrEmpty(activity.getLocation())) {
             msg.put(StringConstants.VERIFYSTATUS, BooleanConstants.UNAVAILABLE);
             msg.put(StringConstants.ERRORMESSAGE, StringConstants.NULLLOCATION);
+        }
+        return msg;
+    }
+
+
+    /*********************************联合操作类型*******************************/
+    /**
+     * 验证并添加活动
+     * 1.验证活动（验证数据库中not null字段非空）
+     * 2.添加活动
+     * Map中返回添加状态（成功或失败）和失败信息
+     */
+    public Map<String, Object> verifyAndAdd(Activity activity) {
+        // 验证活动
+        Map<String, Object> msg = verifyActivity(activity);
+        if (msg.get(StringConstants.VERIFYSTATUS).equals(BooleanConstants.AVAILABLE)) {
+            // 验证通过添加活动
+            if (addActivity(activity) != 1) {
+                msg.put(StringConstants.VERIFYSTATUS, BooleanConstants.UNAVAILABLE);
+                msg.put(StringConstants.ERRORMESSAGE, StringConstants.ADDFAILED);
+            }
+        }
+        return msg;
+    }
+
+    /**
+     * 验证并更新活动
+     * 1.验证活动（验证数据库中not null字段非空）
+     * 2.更新活动
+     * Map中返回添加状态（成功或失败）和失败信息
+     */
+    public Map<String, Object> verifyAndUpdate(Activity activity) {
+        Map<String, Object> msg = verifyActivity(activity);
+        if (msg.get(StringConstants.VERIFYSTATUS).equals(BooleanConstants.AVAILABLE)) {
+            // 验证通过添加活动
+            if (updateActivity(activity) != 1) {
+                msg.put(StringConstants.VERIFYSTATUS, BooleanConstants.UNAVAILABLE);
+                msg.put(StringConstants.ERRORMESSAGE, StringConstants.UPDATEFAILED);
+            }
         }
         return msg;
     }

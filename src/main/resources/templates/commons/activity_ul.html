@@ -8,7 +8,9 @@
 <ul th:fragment="activity_ul">
     <li class="activityLi" th:each="act:${activities}">
         <hr style="margin-left: -70px;background-color: #f0f0f0; height: 1px; width: 1000px;border: none"/>
-        <p class="activityHost">举办人：<span class="important" th:text="${act.host}"></span></p>
+        <p class="activityHost">
+            举办人：<span class="important" th:text="${act.host}"></span></p>
+<!--        <p class="activityHost" th:text="${#request.requestURL}"></p>-->
         <p class="activityName" th:text="${act.name}"></p>
         <p class="activityTime">
             <span class="important" th:text="${#dates.format(act.startTime, 'yyyy-MM-dd HH:mm:ss E')}"></span>
@@ -25,5 +27,37 @@
         </p>
     </li>
 </ul>
+
+<div th:fragment="my_activity_ul">
+    <ul>
+        <li class="activityLi" th:each="act:${activities}">
+            <hr style="margin-left: -70px;background-color: #f0f0f0; height: 1px; width: 1000px;border: none"/>
+            <div class="activity-bottom">
+                <ul>
+                    <li><a class="btn btn-warning btn-sm" th:href="@{/activity/}+${act.id}">修改活动</a></li>
+                    <li><button class="btn btn-danger btn-sm delete-btn"
+                                th:attr="uri=@{/activity/}+${act.id}">删除活动</button></li>
+                </ul>
+            </div>
+            <p class="activityName" th:text="${act.name}"></p>
+            <p class="activityTime">
+                <span class="important" th:text="${#dates.format(act.startTime, 'yyyy-MM-dd HH:mm:ss E')}"></span>
+                ，预计持续
+                <span class="important" th:text="${act.span}"></span>
+                分钟
+            </p>
+            <p>活动地点：
+                <span class="important" th:text="${act.location}"></span>&nbsp;
+                预计花费：
+                <span class="important" th:text="${act.expense}"></span>元</p>
+            <p class="activityDetails" th:if="${act.details!='' and act.details!=null}"><b>详细</b>：
+                <span th:text="${act.details}"></span>
+            </p>
+        </li>
+    </ul>
+    <form id="delete-form" method="post">
+        <input hidden="hidden" name="_method" value="delete">
+    </form>
+</div>
 </body>
 </html>

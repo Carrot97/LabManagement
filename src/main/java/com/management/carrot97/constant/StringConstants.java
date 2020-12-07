@@ -11,6 +11,8 @@ public class StringConstants {
 
     public static final String ADDFAILED = "添加失败，请联系作者";
 
+    public static final Object UPDATEFAILED = "更新失败，请联系作者";
+
     public static final String ILLEGALUSERNAME = "用户名不合法, 2-4个中文";
 
     public static final String ILLEGALPASSWORD = "密码不合法，数字,英文,字符两种以上";
@@ -32,4 +34,5 @@ public class StringConstants {
     public static final Object NULLHOST = "举办人错误，请联系作者";
 
     public static final Object NULLLOCATION = "地点为空";
+
 }

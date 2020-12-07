@@ -5,7 +5,8 @@
     <title>个人中心 · 创新苑</title>
     <th:block th:include="commons/header::header"/>
     <link th:href="@{/assets/css/me.css}" rel="stylesheet">
-    <link th:href="@{/assets/css/activity.css}" rel="stylesheet">
+    <link th:href="@{/assets/css/activity_ul.css}" rel="stylesheet">
+    <link th:href="@{/assets/css/my_activity.css}" rel="stylesheet">
 </head>
 <body>
 <!--导航栏-->
@@ -18,16 +19,10 @@
         <!--次级导航栏-->
         <div th:replace="commons/me::subnavber(subActiveUri='myActivity')"></div>
         <div class="button-box">
-            <ul>
-                <li><a class="btn btn-success btn-sm" th:href="@{/activity/add}">发布活动</a></li>
-                <li><a class="btn btn-warning btn-sm" >修改活动</a></li>
-                <li><a class="btn btn-danger btn-sm" >删除活动</a></li>
-            </ul>
+            <a class="btn btn-success" th:href="@{/activity/}">发布活动</a>
         </div>
         <!--活动表格-->
-        <div class="table-box">
-            <div th:replace="commons/activity_ul::activity_ul"></div>
-        </div>
+        <div th:replace="commons/activity_ul::my_activity_ul"></div>
     </div>
 </div>
 </body>

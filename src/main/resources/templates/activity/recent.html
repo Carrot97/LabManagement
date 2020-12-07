@@ -8,14 +8,14 @@
     <meta name="generator" content="Jekyll v4.0.1">
     <title>最近活动 · 创新苑</title>
     <th:block th:include="commons/header::header"/>
-    <link th:href="@{/assets/css/list.css}" rel="stylesheet">
+    <link th:href="@{/assets/css/activity_ul.css}" rel="stylesheet">
 </head>
 <body>
 <!--导航栏-->
 <div th:replace="commons/base::navbar(activeUri='activity')"></div>
 <div class="main shadow">
     <h2 class="subtitle">最近活动</h2>
-    <div th:replace="commons/activity_ul"></div>
+    <div th:replace="commons/activity_ul::activity_ul"></div>
 </div>
 </body>
 </html>

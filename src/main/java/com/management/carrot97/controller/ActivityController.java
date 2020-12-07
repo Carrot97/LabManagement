@@ -8,8 +8,7 @@ import com.management.carrot97.constant.StringConstants;
 import com.management.carrot97.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -47,8 +46,8 @@ public class ActivityController {
      */
     @GetMapping(value = "/activity/user")
     public String getPersonalActivities(Page page,
-                                 Map<String, Object> map,
-                                 HttpSession session) {
+                                        Map<String, Object> map,
+                                        HttpSession session) {
         User loginUser = (User) session.getAttribute(StringConstants.LOGINUSER);
         List<Activity> activities = activityService.getPage(page, loginUser.getUserName());
         map.put("activities", activities);
@@ -56,9 +55,15 @@ public class ActivityController {
     }
 
 
-    /*跳转至添加活动页面*/
-    @GetMapping(value = "/activity/add")
-    public String getAddPage() {
+    /*提取指定活动信息并跳转至修改页面*/
+    @GetMapping(value = {"/activity/{id}", "/activity/"})
+    public String getActivity(@PathVariable(value = "id", required = false) Integer activityId,
+                              Map<String, Object> map) {
+        if (activityId != null) {
+            Activity activity = activityService.getActivity(activityId);
+            map.put("update", "1");
+            map.put("activity", activity);
+        }
         return "activity/add";
     }
 
@@ -68,13 +73,31 @@ public class ActivityController {
     public String addActivity(Activity activity,
                               Map<String, Object> map) {
         Map<String, Object> msg = activityService.verifyAndAdd(activity);
-        System.out.println(activity);
+//        System.out.println(activity);
         if (BooleanConstants.AVAILABLE.equals(msg.get(StringConstants.VERIFYSTATUS))) {
             // 添加成功返回主页面
             return "redirect:/activity/recent";
         } else {
             // 添加失败回显活动信息和错误信息
             map.put("msg", msg.get(StringConstants.ERRORMESSAGE));
+            map.put("activity", activity);
+            return "activity/add";
+        }
+    }
+
+    /*提交修改活动表单*/
+    @PutMapping(value = "/activity")
+    public String updateActivity(Activity activity,
+                                 Map<String, Object> map) {
+        Map<String, Object> msg = activityService.verifyAndUpdate(activity);
+        System.out.println(activity);
+        if (BooleanConstants.AVAILABLE.equals(msg.get(StringConstants.VERIFYSTATUS))) {
+            // 添加成功返回主页面
+            return "redirect:/activity/user?pageNumber=1&pageSize=5";
+        } else {
+            // 添加失败回显活动信息和错误信息
+            map.put("msg", msg.get(StringConstants.ERRORMESSAGE));
+            map.put("update", "1");
             map.put("activity", activity);
             return "activity/add";
         }

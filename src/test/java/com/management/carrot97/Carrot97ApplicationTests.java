@@ -33,7 +33,7 @@ public class Carrot97ApplicationTests {
 
     @Test
     public void contextLoads() {
-
+//        activityMapper.updateByPrimaryKey()
     }
 
     @Test

@@ -12,7 +12,7 @@
 <div class="main shadow">
     <div class="add-box">
         <div style="text-align: center; margin-bottom: 50px">
-            <h1>发布活动</h1>
+            <h1 th:text="${update==null?'发布活动':'修改活动'}"></h1>
         </div>
         <div class="left-box" style="text-align: right">
             <br/>
@@ -25,6 +25,11 @@
         </div>
         <div class="right-box">
             <form class="form-add" th:action="@{/activity}" method="post">
+                <!--支持PUT请求-->
+                <input type="hidden" name="_method" value="put" th:if="update!=null">
+                <!--修改时按照id检索-->
+                <input type="hidden" name="id" th:value="${activity!=null?activity.id:''}">
+                <!--添加和修改活动需要提供举办者姓名-->
                 <input name="host" hidden="hidden" th:value="${session.loginUser.userName}">
                 <!--活动名称-->
                 <div class="form-group">
@@ -44,19 +49,20 @@
                 <!--预计耗时-->
                 <div class="form-group">
                     <input type="number" name="span" class="form-control" id="inputSpan"
-                           placeholder="预计耗时" th:value="${activity!=null?activity.span:''}">
+                           placeholder="预计耗时(分钟)" th:value="${activity!=null?activity.span:''}">
                 </div>
                 <!--预计花费-->
                 <div class="form-group">
                     <input type="number" name="expense" class="form-control" id="inputExpense"
-                           placeholder="预计花费" th:value="${activity!=null?activity.expense:''}">
+                           placeholder="预计花费(元)" th:value="${activity!=null?activity.expense:''}">
                 </div>
                 <!--细节描述-->
                 <div class="form-group">
                     <textarea name="details" rows="10" class="form-control" style="height:105px;overflow:auto"
                               th:text="${activity!=null?activity.details:''}"></textarea>
                 </div>
-                <button class="btn btn-primary" type="submit">发布</button>
+                <button th:class="${update==null?'btn btn-success':'btn btn-warning'}" class="btn btn-primary"
+                        type="submit" th:text="${update==null?'发布':'修改'}"></button>
                 <span id="msg" th:text="${msg}"></span>
 <!--                <p class="mt-5 mb-3 text-muted text-center"></p>-->
             </form>
