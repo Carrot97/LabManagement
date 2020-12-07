@@ -2,6 +2,24 @@ main {
     width: 1000px;
 }
 
-.table-responsive {
-    padding: 0 50px;
+.important {
+    color: #004894;
+}
+
+.activityName {
+    font-size: 20px;
+    font-weight: 550;
+}
+
+.activityLi {
+    width: 900px;
+    margin: 0 auto;
+    /*background: #204d74;*/
+}
+
+.activityHost {
+    float: right;
+    font-size: 16px;
+    margin-top: 8px;
+    margin-right: 50px;
 }

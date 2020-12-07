@@ -14,11 +14,8 @@
 <!--导航栏-->
 <div th:replace="commons/base::navbar(activeUri='activity')"></div>
 <div class="main shadow">
-    <main role="main" class="ml-sm-auto px-md-4">
-        <br/>
-        <h2 class="subtitle">最近活动</h2>
-        <div th:replace="commons/activity_table"></div>
-    </main>
+    <h2 class="subtitle">最近活动</h2>
+    <div th:replace="commons/activity_ul"></div>
 </div>
 </body>
 </html>
