@@ -36,15 +36,19 @@ body {
 }
 
 .shadow-white {
-    box-shadow: 0 0 0 5px white
+    box-shadow: 0 0 0 5px white;
+}
+
+.shadow-wallGray {
+    box-shadow: 0 0 0 5px #bdb5b3;
 }
 
 .angle-rounded {
-    border-radius:3px 3px 3px 3px
+    border-radius:3px 3px 3px 3px;
 }
 
 .angle-rounded-up {
-    border-radius:3px 3px 0 0
+    border-radius:3px 3px 0 0;
 }
 
 .page-handler {

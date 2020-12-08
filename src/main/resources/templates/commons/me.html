@@ -12,11 +12,13 @@
 
 <div class="main">
     <div th:fragment="visitingCard">
-        <img class="portrait shadow-white angle-rounded" width="160" height="160"
+        <img class="portrait shadow-wallGray angle-rounded" width="160" height="160"
              th:src="@{/assets/img/user-1.jpg}">
-        <div class="headtop angle-rounded-up"></div>
+        <div class="headtop angle-rounded-up">
+            <img class="angle-rounded" width="1000" height="250" th:src="@{/assets/img/header.png}">
+        </div>
         <div class="headbot angle-rounded shadow">
-            <h2 class="username" th:text="${session.loginUser.userName}"></h2>
+            <p class="username" th:text="${session.loginUser.userName}"></p>
         </div>
     </div>
     <div class="sub-main angle-rounded shadow">

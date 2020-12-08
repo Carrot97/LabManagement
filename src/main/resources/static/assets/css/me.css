@@ -35,8 +35,10 @@
 .username {
     position: relative;
     margin-left: 225px;
-    margin-top: 15px;
+    padding-top: 15px;
+    font-size: 30px;
     font-weight: 900;
+    z-index: 999;
 }
 
 .sub-main {
