@@ -9,7 +9,6 @@ import com.management.carrot97.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
@@ -72,8 +71,8 @@ public class ActivityController {
     @PostMapping(value = "/activity")
     public String addActivity(Activity activity,
                               Map<String, Object> map) {
+        System.out.println("活动添加操作");
         Map<String, Object> msg = activityService.verifyAndAdd(activity);
-//        System.out.println(activity);
         if (BooleanConstants.AVAILABLE.equals(msg.get(StringConstants.VERIFYSTATUS))) {
             // 添加成功返回主页面
             return "redirect:/activity/recent";
@@ -85,12 +84,13 @@ public class ActivityController {
         }
     }
 
+
     /*提交修改活动表单*/
     @PutMapping(value = "/activity")
     public String updateActivity(Activity activity,
                                  Map<String, Object> map) {
+        System.out.println("活动修改操作");
         Map<String, Object> msg = activityService.verifyAndUpdate(activity);
-        System.out.println(activity);
         if (BooleanConstants.AVAILABLE.equals(msg.get(StringConstants.VERIFYSTATUS))) {
             // 添加成功返回主页面
             return "redirect:/activity/user?pageNumber=1&pageSize=5";
@@ -101,6 +101,14 @@ public class ActivityController {
             map.put("activity", activity);
             return "activity/add";
         }
+    }
+
+    /*提交活动删除请求*/
+    @DeleteMapping(value = "/activity/{id}")
+    public String deleteActivity(@PathVariable("id") Integer activityId) {
+        // 反馈信息暂时不用
+        Map<String, Object> msg = activityService.deleteActivity(activityId);
+        return "redirect:/activity/user?pageNumber=1&pageSize=5";
     }
 
 }

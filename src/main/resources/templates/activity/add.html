@@ -26,7 +26,7 @@
         <div class="right-box">
             <form class="form-add" th:action="@{/activity}" method="post">
                 <!--支持PUT请求-->
-                <input type="hidden" name="_method" value="put" th:if="update!=null">
+                <input type="hidden" name="_method" value="put" th:if="${update}!=null">
                 <!--修改时按照id检索-->
                 <input type="hidden" name="id" th:value="${activity!=null?activity.id:''}">
                 <!--添加和修改活动需要提供举办者姓名-->

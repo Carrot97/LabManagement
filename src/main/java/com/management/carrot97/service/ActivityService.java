@@ -119,4 +119,14 @@ public class ActivityService {
         }
         return msg;
     }
+
+    public Map<String, Object> deleteActivity(Integer activityId) {
+        HashMap<String, Object> msg = new HashMap<>();
+        msg.put(StringConstants.VERIFYSTATUS, BooleanConstants.AVAILABLE);
+        if (activityMapper.deleteByPrimaryKey(activityId) != 1) {
+            msg.put(StringConstants.VERIFYSTATUS, BooleanConstants.UNAVAILABLE);
+            msg.put(StringConstants.ERRORMESSAGE, StringConstants.DELETEFAILED);
+        }
+        return msg;
+    }
 }
