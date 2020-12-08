@@ -6,6 +6,7 @@ body {
     background: #ffffff;
     width: 1000px;
     margin: 70px auto;
+    margin-bottom: 30px;
     /*padding: 20px 20px;*/
 }
 
@@ -44,4 +45,14 @@ body {
 
 .angle-rounded-up {
     border-radius:3px 3px 0 0
+}
+
+.page-handler {
+    margin-top: 35px;
+    padding-bottom: 25px;
+    text-align: center;
+}
+
+.tail {
+    text-align: center;
 }
