@@ -19,12 +19,8 @@ spring:
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mybatis/mapper/*.xml
-
-
-#---
-#server:
-#  port: 8081
-#spring:
-#  profiles: dev
-#
-#---
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql

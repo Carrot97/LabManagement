@@ -28,9 +28,9 @@
                     <ul class="dropdown-menu">
                         <li><a th:href="@{/activity/recent}">
                             最近活动</a></li>
-                        <li><a th:href="@{/activity/all(pageNumber=1,pageSize=5)}">
+                        <li><a th:href="@{/activity/all(pageNumber=1)}">
                             全部活动</a></li>
-                        <li><a th:href="@{/activity/user(pageNumber=1,pageSize=5)}">
+                        <li><a th:href="@{/activity/user(pageNumber=1)}">
                             我的活动</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a th:href="@{/activity/}">发布活动</a></li>
@@ -52,7 +52,7 @@
                 <!--<li><a href="#">注销</a></li>-->
             </ul>
             <ul class="nav navbar-nav navbar-right" th:if="${session.loginUser!=null}">
-                <li><a th:href="@{/activity/user(pageNumber=1,pageSize=5)}">个人中心</a></li>
+                <li><a th:href="@{/activity/user(pageNumber=1)}">个人中心</a></li>
                 <li><a th:href="@{/user/logout}">注销</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->

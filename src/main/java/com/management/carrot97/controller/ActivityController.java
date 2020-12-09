@@ -1,5 +1,6 @@
 package com.management.carrot97.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.management.carrot97.bean.Activity;
 import com.management.carrot97.bean.Page;
 import com.management.carrot97.bean.User;
@@ -24,7 +25,8 @@ public class ActivityController {
     @GetMapping(value = "/activity/recent")
     public String recentActivities(Map<String, Object> map) {
         List<Activity> activities = activityService.getRecent();
-        map.put("activities", activities);
+        PageInfo<Activity> pageInfo = new PageInfo<>(activities);
+        map.put("pageInfo", pageInfo);
         return "activity/recent";
     }
 
@@ -33,8 +35,8 @@ public class ActivityController {
     @GetMapping(value = "/activity/all")
     public String getActivities(Page page,
                                 Map<String, Object> map) {
-        List<Activity> activities = activityService.getPage(page, null);
-        map.put("activities", activities);
+        PageInfo<Activity> pageInfo = activityService.getPage(page, null);
+        map.put("pageInfo", pageInfo);
         return "activity/all";
     }
 
@@ -48,8 +50,8 @@ public class ActivityController {
                                         Map<String, Object> map,
                                         HttpSession session) {
         User loginUser = (User) session.getAttribute(StringConstants.LOGINUSER);
-        List<Activity> activities = activityService.getPage(page, loginUser.getUserName());
-        map.put("activities", activities);
+        PageInfo<Activity> pageInfo = activityService.getPage(page, loginUser.getUserName());
+        map.put("pageInfo", pageInfo);
         return "user/activity";
     }
 
@@ -93,7 +95,7 @@ public class ActivityController {
         Map<String, Object> msg = activityService.verifyAndUpdate(activity);
         if (BooleanConstants.AVAILABLE.equals(msg.get(StringConstants.VERIFYSTATUS))) {
             // 添加成功返回主页面
-            return "redirect:/activity/user?pageNumber=1&pageSize=5";
+            return "redirect:/activity/user?pageNumber=1";
         } else {
             // 添加失败回显活动信息和错误信息
             map.put("msg", msg.get(StringConstants.ERRORMESSAGE));
@@ -108,7 +110,7 @@ public class ActivityController {
     public String deleteActivity(@PathVariable("id") Integer activityId) {
         // 反馈信息暂时不用
         Map<String, Object> msg = activityService.deleteActivity(activityId);
-        return "redirect:/activity/user?pageNumber=1&pageSize=5";
+        return "redirect:/activity/user?pageNumber=1";
     }
 
 }

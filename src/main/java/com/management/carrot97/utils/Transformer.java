@@ -5,7 +5,7 @@ import com.management.carrot97.bean.OriginalUser;
 import com.management.carrot97.bean.User;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 public class Transformer {
@@ -16,7 +16,7 @@ public class Transformer {
         // 仅适应输入，知道月日就可以（祝生日快乐了），没必要知道年龄（知道也不好）
         String birthday = "2020-" + oUser.getBirthday();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = (Date) format.parse(birthday);
+        Date date = format.parse(birthday);
         return new User(oUser.getUsername(),
                 oUser.getPassword1(),
                 date,

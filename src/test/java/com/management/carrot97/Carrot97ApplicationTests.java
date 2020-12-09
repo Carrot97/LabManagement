@@ -1,5 +1,6 @@
 package com.management.carrot97;
 
+import com.github.pagehelper.PageInfo;
 import com.management.carrot97.bean.Activity;
 import com.management.carrot97.bean.OriginalUser;
 import com.management.carrot97.bean.Page;
@@ -33,7 +34,8 @@ public class Carrot97ApplicationTests {
 
     @Test
     public void contextLoads() {
-//        activityMapper.updateByPrimaryKey()
+        PageInfo<Activity> pageInfo = activityService.getPage(new Page(1), null);
+        System.out.println(pageInfo);
     }
 
     @Test

@@ -21,17 +21,7 @@
         from activity
         where id = #{id,jdbcType=INTEGER}
     </select>
-<!--    List<Activity> selectByPageInfo(@Param("start") Integer pageStart,-->
-<!--    @Param("end") Integer pageEnd);-->
-    <select id="selectByPageInfo" resultMap="BaseResultMap">
-        select *
-        from activity
-        <if test="username != null">
-            where host = #{username}
-        </if>
-        order by start_time desc
-        limit #{start}, #{end}
-    </select>
+
 <!--    List<Activity> selectRecent();-->
     <select id="selectRecent" resultMap="BaseResultMap">
         select *
@@ -39,6 +29,17 @@
         where datediff(start_time, curdate()) >= 0
         order by start_time asc
         limit 10
+    </select>
+
+    <!--List<Activity> selectPage();-->
+    <select id="selectPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from activity
+        <if test="username != null">
+            where host = #{username}
+        </if>
+        order by start_time desc
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">

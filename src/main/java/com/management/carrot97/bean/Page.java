@@ -1,16 +1,15 @@
 package com.management.carrot97.bean;
 
+import com.management.carrot97.constant.NumberConstants;
+
 public class Page {
     private Integer pageNumber;
 
     private Integer pageSize;
 
-    private Integer numberStart;
-
-    public Page(Integer pageNumber, Integer pageSize) {
+    public Page(Integer pageNumber) {
         this.pageNumber = pageNumber;
-        this.pageSize = pageSize;
-        this.numberStart = (pageNumber - 1) * pageSize;
+        this.pageSize = NumberConstants.PAGESIZE;
     }
 
     public Integer getPageNumber() {
@@ -21,16 +20,11 @@ public class Page {
         return pageSize;
     }
 
-    public Integer getNumberStart() {
-        return numberStart;
-    }
-
     @Override
     public String toString() {
         return "Page{" +
                 "pageNumber=" + pageNumber +
                 ", pageSize=" + pageSize +
-                ", numberStart=" + numberStart +
                 '}';
     }
 }

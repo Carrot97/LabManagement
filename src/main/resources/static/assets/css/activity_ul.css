@@ -34,3 +34,7 @@ main {
     list-style-type: none;
     margin-bottom: 5px;
 }
+
+.activity-notice {
+    text-align: center;
+}

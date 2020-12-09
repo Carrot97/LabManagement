@@ -23,9 +23,12 @@
         </div>
         <!--活动表格-->
         <div th:replace="commons/activity_ul::my_activity_ul"></div>
+        <div th:replace="commons/page_handler::page-handler"></div>
     </div>
+    <div th:replace="commons/tail::tail"></div>
 </div>
 <script th:src="@{/assets/js/nav_switch_handler.js}"></script>
 <script th:src="@{/assets/js/delete_form.js}"></script>
+<script th:src="@{/assets/js/activity_notice.js}"></script>
 </body>
 </html>

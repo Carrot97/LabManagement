@@ -5,12 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<ul th:fragment="activity_ul">
-    <li class="activityLi" th:each="act:${activities}">
+<ul class="activity_ul" th:fragment="activity_ul">
+    <p class="activity-notice"></p>
+    <li class="activityLi" th:each="act:${pageInfo.list}">
         <hr style="margin-left: -70px;background-color: #f0f0f0; height: 1px; width: 1000px;border: none"/>
         <p class="activityHost">
             举办人：<span class="important" th:text="${act.host}"></span></p>
-<!--        <p class="activityHost" th:text="${#request.requestURL}"></p>-->
         <p class="activityName" th:text="${act.name}"></p>
         <p class="activityTime">
             <span class="important" th:text="${#dates.format(act.startTime, 'yyyy-MM-dd HH:mm:ss E')}"></span>
@@ -29,14 +29,18 @@
 </ul>
 
 <div th:fragment="my_activity_ul">
-    <ul>
-        <li class="activityLi" th:each="act:${activities}">
+    <ul class="activity_ul">
+        <p class="activity-notice"></p>
+        <li class="activityLi" th:each="act:${pageInfo.list}">
             <hr style="margin-left: -70px;background-color: #f0f0f0; height: 1px; width: 1000px;border: none"/>
             <div class="activity-bottom">
                 <ul>
                     <li><a class="btn btn-warning btn-sm" th:href="@{/activity/}+${act.id}">修改活动</a></li>
-                    <li><button class="btn btn-danger btn-sm delete-btn"
-                                th:attr="uri=@{/activity/}+${act.id}">删除活动</button></li>
+                    <li>
+                        <button class="btn btn-danger btn-sm delete-btn"
+                                th:attr="uri=@{/activity/}+${act.id}">删除活动
+                        </button>
+                    </li>
                 </ul>
             </div>
             <p class="activityName" th:text="${act.name}"></p>
