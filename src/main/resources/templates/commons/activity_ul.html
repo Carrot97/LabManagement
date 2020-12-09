@@ -11,13 +11,18 @@
         <hr style="margin-left: -70px;background-color: #f0f0f0; height: 1px; width: 1000px;border: none"/>
         <p class="activityHost">
             举办人：<span class="important" th:text="${act.host}"></span></p>
-        <p class="activityName" th:text="${act.name}"></p>
+        <th:block th:with="timeout=${#dates.createNow().after(act.startTime)}">
+        <p class="activityName"
+           th:text="${timeout?act.name+'(已过期)':act.name}"
+           th:style="${timeout?'text-decoration:line-through':''}"></p>
         <p class="activityTime">
-            <span class="important" th:text="${#dates.format(act.startTime, 'yyyy-MM-dd HH:mm:ss E')}"></span>
+            <span class="important" th:text="${#dates.format(act.startTime, 'yyyy-MM-dd HH:mm:ss E')}"
+                  th:style="${timeout?'color:#b73737':''}"></span>
             ，预计持续
             <span class="important" th:text="${act.span}"></span>
             分钟
         </p>
+        </th:block>
         <p>活动地点：
             <span class="important" th:text="${act.location}"></span>&nbsp;
             预计花费：
@@ -43,13 +48,18 @@
                     </li>
                 </ul>
             </div>
-            <p class="activityName" th:text="${act.name}"></p>
-            <p class="activityTime">
-                <span class="important" th:text="${#dates.format(act.startTime, 'yyyy-MM-dd HH:mm:ss E')}"></span>
-                ，预计持续
-                <span class="important" th:text="${act.span}"></span>
-                分钟
-            </p>
+            <th:block th:with="timeout=${#dates.createNow().after(act.startTime)}">
+                <p class="activityName"
+                   th:text="${timeout?act.name+'(已过期)':act.name}"
+                   th:style="${timeout?'text-decoration:line-through':''}"></p>
+                <p class="activityTime">
+            <span class="important" th:text="${#dates.format(act.startTime, 'yyyy-MM-dd HH:mm:ss E')}"
+                  th:style="${timeout?'color:#b73737':''}"></span>
+                    ，预计持续
+                    <span class="important" th:text="${act.span}"></span>
+                    分钟
+                </p>
+            </th:block>
             <p>活动地点：
                 <span class="important" th:text="${act.location}"></span>&nbsp;
                 预计花费：
