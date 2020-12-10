@@ -80,7 +80,7 @@ public class ActivityController {
             return "redirect:/activity/recent";
         } else {
             // 添加失败回显活动信息和错误信息
-            map.put("msg", msg.get(StringConstants.ERRORMESSAGE));
+            map.put(StringConstants.FEEDBACKMSG, msg.get(StringConstants.ERRORMESSAGE));
             map.put("activity", activity);
             return "activity/add";
         }
@@ -98,7 +98,7 @@ public class ActivityController {
             return "redirect:/activity/user?pageNumber=1";
         } else {
             // 添加失败回显活动信息和错误信息
-            map.put("msg", msg.get(StringConstants.ERRORMESSAGE));
+            map.put(StringConstants.FEEDBACKMSG, msg.get(StringConstants.ERRORMESSAGE));
             map.put("update", "1");
             map.put("activity", activity);
             return "activity/add";

@@ -1,6 +1,5 @@
 package com.management.carrot97.controller;
 
-import com.management.carrot97.bean.Activity;
 import com.management.carrot97.bean.OriginalUser;
 import com.management.carrot97.bean.User;
 import com.management.carrot97.constant.StringConstants;
@@ -11,9 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -46,7 +45,7 @@ public class UserController {
             return "redirect:/activity/recent";
         } else {
             // 回显错误信息
-            map.put("msg", "用户名或密码错误");
+            map.put(StringConstants.FEEDBACKMSG, StringConstants.ERRORLOGIN);
             map.put("username", username);
             return "user/login";
         }
@@ -70,7 +69,6 @@ public class UserController {
     }
 
 
-
     /**
      * 提交注册页面
      * 1.验证并添加用户--得到状态反馈信息
@@ -90,9 +88,80 @@ public class UserController {
         } else {
 //            3.若不成功则返回注册页面，并回显用户和错误信息
 //            System.out.println("添加失败，错误信息" + msg.toString());
-            map.put("msg", msg.get(StringConstants.ERRORMESSAGE));
+            map.put(StringConstants.FEEDBACKMSG, msg.get(StringConstants.ERRORMESSAGE));
             map.put("user", originalUser);
             return "user/register";
         }
     }
+
+
+    /*获取更换头像页面*/
+    @GetMapping(value = "/portrait")
+    public String getPortraitChange() {
+        return "user/portrait";
+    }
+
+    /**
+     * 上传头像操作
+     * 1.取出登录用户
+     * 2.保存图片
+     * 3.保存失败则返回上传图片页面并回显错误信息
+     * 5.保存成功则更新user数据库中imgPath字段
+     * 4.修改成功返回个人中心首页
+     */
+    @PostMapping(value = "/portrait")
+    public String uploadPortrait(@RequestParam(value = "file") MultipartFile file,
+                                 HttpSession session,
+                                 Map<String, Object> map) {
+        User user = (User) session.getAttribute(StringConstants.LOGINUSER);
+        Map<String, Object> msg = userService.verifyAndSavePic(file, user);
+        System.out.println(msg);
+        if (BooleanConstants.UNAVAILABLE.equals(msg.get(StringConstants.VERIFYSTATUS))) {
+            map.put(StringConstants.FEEDBACKMSG, msg.get(StringConstants.ERRORMESSAGE));
+            return "user/portrait";
+        }
+        if ("default".equals(user.getImgPath())) {
+            user.setImgPath("obeyId-" + user.getUserId());
+            session.setAttribute(StringConstants.LOGINUSER, user);
+            msg = userService.updateUserPortrait(user);
+            if (BooleanConstants.UNAVAILABLE.equals(msg.get(StringConstants.VERIFYSTATUS))) {
+                map.put(StringConstants.FEEDBACKMSG, msg.get(StringConstants.ERRORMESSAGE));
+                return "user/portrait";
+            }
+        }
+        return "redirect:/activity/user?pageNumber=1";
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

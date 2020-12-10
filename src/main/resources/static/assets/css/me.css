@@ -8,7 +8,7 @@
     width: 1000px;
     height: 140px;
     background: #919191;
-    z-index: 998;
+    z-index: 990;
 }
 
 .main .headbot {
@@ -28,8 +28,22 @@
     /*浮动*/
     display: flex;
     /*层叠优先级*/
-    z-index: 999;
+    z-index: 998;
     background: white;
+}
+
+.portrait-change {
+    position: absolute;
+    margin-left: 30px;
+    margin-top: 70px;
+    width: 160px;
+    height: 160px;
+    /*浮动*/
+    display: none;
+    /*层叠优先级*/
+    z-index: 999;
+    /*透明度*/
+    /*background: white;*/
 }
 
 .username {
@@ -40,6 +54,10 @@
     font-weight: 900;
     z-index: 999;
 }
+
+/*.vcard-bg {*/
+/*    z-index: 999;*/
+/*}*/
 
 .sub-main {
     margin-top: 20px;

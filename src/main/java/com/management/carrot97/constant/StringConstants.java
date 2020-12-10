@@ -9,6 +9,8 @@ public class StringConstants {
 
     public static final String LOGINUSER = "loginUser";
 
+    public static final String FEEDBACKMSG = "msg";
+
 
     /*内部错误*/
     public static final String TRANSFORMERROR = "用户转换失败,请联系作者";
@@ -21,8 +23,13 @@ public class StringConstants {
 
     public static final String NULLHOST = "举办人错误，请联系作者";
 
+    public static final String SAVEFAILD = "文件上传失败，请联系作者";
+
+    public static final Object DBUPDATEERROR = "数据库更新错误，请联系作者";
 
     /*不合法错误*/
+    public static final String ERRORLOGIN = "用户名或密码错误";
+
     public static final String ILLEGALUSERNAME = "用户名不合法, 2-4个中文";
 
     public static final String ILLEGALPASSWORD = "密码不合法，数字,英文,字符两种以上";
@@ -39,6 +46,9 @@ public class StringConstants {
 
     public static final String NULLLOCATION = "地点为空";
 
+    public static final String NULLLOGINUSER = "未检测到登录用户，请先登录";
+
+    public static final String NULLFILE = "上传文件为空，请重新上传";
 
     /*占用错误*/
     public static final String EMAILOCCUPIED = "该邮箱已被占用";

@@ -70,7 +70,7 @@ public class User {
                 userName,
                 password,
                 birthday,
-                "D://picture",
+                "default",
                 degree,
                 email,
                 phoneNumber,

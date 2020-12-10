@@ -13,7 +13,6 @@ public interface UserMapper {
     Boolean addUser(User user);
 
 
-
     /**
      * retrieve
      *
@@ -25,4 +24,6 @@ public interface UserMapper {
 
     // 按手机号查找*一个*用户
     User getUserByPhoneNumber(String phoneNumber);
+
+    Boolean updatePortrait(User user);
 }

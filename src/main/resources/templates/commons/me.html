@@ -12,14 +12,21 @@
 
 <div class="main">
     <div th:fragment="visitingCard">
+        <img class="portrait-change" width="160" height="160"
+             th:src="@{/assets/img/portrait_change.png}">
         <img class="portrait shadow-wallGray angle-rounded" width="160" height="160"
-             th:src="@{/assets/img/user-1.jpg}">
+             th:src="@{/assets/img/user-{filename}.png(filename=${session.loginUser.userId})}"
+             th:if="${session.loginUser.imgPath}!='default'">
+        <img class="portrait shadow-wallGray angle-rounded" width="160" height="160"
+             th:src="@{/assets/img/default.jpg}"
+             th:if="${session.loginUser.imgPath}=='default'">
         <div class="headtop angle-rounded-up">
-            <img class="angle-rounded" width="1000" height="250" th:src="@{/assets/img/header.png}">
+            <img class="vcard-bg angle-rounded" width="1000" height="250" th:src="@{/assets/img/header.png}">
         </div>
         <div class="headbot angle-rounded shadow">
             <p class="username" th:text="${session.loginUser.userName}"></p>
         </div>
+        <form id="portrait-change-form" th:action="@{/portrait}" method="get"></form>
     </div>
     <div class="sub-main angle-rounded shadow">
         <div class="sub-nav" th:fragment="subnavber">

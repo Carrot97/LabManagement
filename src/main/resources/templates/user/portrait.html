@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心 · 创新苑</title>
+    <th:block th:include="commons/header::header"/>
+    <link th:href="@{/assets/css/me.css}" rel="stylesheet">
+    <link th:href="@{/assets/css/portrait.css}" rel="stylesheet">
+</head>
+<body>
+<!--导航栏-->
+<div th:replace="commons/base::navbar"></div>
+
+<div class="main">
+    <!--用户名片-->
+    <div th:replace="commons/me::visitingCard"></div>
+    <div class="sub-main angle-rounded shadow">
+        <h2 class="subtitle">上传头像</h2>
+        <form th:action="@{/portrait}" class="add-box form-group" method="post" enctype="multipart/form-data">
+            <input type="file" id="exampleInputFile" name="file">
+            <p class="help-block">图片最大限制：5MB</p>
+            <button class="btn btn-primary" type="submit">上传</button>
+            <span id="msg" th:text="${msg}"></span>
+        </form>
+    </div>
+    <div th:replace="commons/tail::tail"></div>
+</div>
+<script th:src="@{/assets/js/portrait_change.js}"></script>
+</body>
+</html>

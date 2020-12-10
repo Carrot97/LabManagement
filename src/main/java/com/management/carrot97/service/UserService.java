@@ -9,6 +9,11 @@ import com.management.carrot97.utils.StringVerify;
 import com.management.carrot97.utils.Transformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.util.ResourceUtils;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.*;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
@@ -140,5 +145,66 @@ public class UserService {
             }
         }
         return user;
+    }
+
+    /**
+     * 1.判断用户是否登录
+     * 2.判断上传文件是否合规
+     * 3.指定文件名
+     * 4.保存文件
+     */
+    public Map<String, Object> verifyAndSavePic(MultipartFile file, User user) {
+        Map<String, Object> msg = new HashMap<>();
+        msg.put(StringConstants.VERIFYSTATUS, BooleanConstants.UNAVAILABLE);
+        // 1.判断用户是否登录
+        if (!msg.containsKey(StringConstants.ERRORMESSAGE) && user==null) {
+            msg.put(StringConstants.ERRORMESSAGE, StringConstants.NULLLOGINUSER);
+        }
+        // 2.判断上传文件是否合规
+        if (!msg.containsKey(StringConstants.ERRORMESSAGE) && file.isEmpty()) {
+            msg.put(StringConstants.ERRORMESSAGE, StringConstants.NULLFILE);
+        }
+        if (!msg.containsKey(StringConstants.ERRORMESSAGE)) {
+            InputStream inputStream = null;
+            OutputStream outputStream = null;
+            try {
+                // 3.指定文件名
+                // 3.1 取出工程路径
+                String path = ResourceUtils.getURL("classpath:").getPath();
+                // 3.2 指定工程内保存位置
+                path += "static/assets/img/";
+                // 由于上面判断过用户是否为空，这可以断言
+                assert user != null;
+                // 3.3 创建文件文件名为user-${userid}
+                File targetFile = new File(path + "user-" + user.getUserId() + ".png");
+//                System.out.println(path + "user-" + user.getUserId() + ".png");
+                // 4.保存文件
+                // 4.1 数据流接收文件
+                inputStream = file.getInputStream();
+                // 4.2 输出流保存文件
+                outputStream = new FileOutputStream(targetFile);
+                // 4.3 用copy方法保存文件
+                FileCopyUtils.copy(inputStream, outputStream);
+            } catch (Exception e) {
+                msg.put(StringConstants.ERRORMESSAGE, StringConstants.SAVEFAILD);
+            }
+        }
+        if (!msg.containsKey(StringConstants.ERRORMESSAGE)) {
+            msg.put(StringConstants.VERIFYSTATUS, BooleanConstants.AVAILABLE);
+        }
+        return msg;
+    }
+
+
+    /*更新用户头像路径*/
+    public Map<String, Object> updateUserPortrait(User user) {
+        Map<String, Object> msg = new HashMap<>();
+        if (!userMapper.updatePortrait(user)) {
+            msg.put(StringConstants.VERIFYSTATUS, BooleanConstants.UNAVAILABLE);
+            msg.put(StringConstants.ERRORMESSAGE, StringConstants.DBUPDATEERROR);
+        } else {
+            msg.put(StringConstants.VERIFYSTATUS, BooleanConstants.AVAILABLE);
+        }
+        return msg;
     }
 }

@@ -32,5 +32,8 @@
         values (#{userName},#{password},#{birthday},#{imgPath},#{degree},#{email},#{phoneNumber},#{privilege})
     </insert>
 
-
+    <!-- Boolean updatePortrait(User user);-->
+    <update id="updatePortrait">
+        update `user` set img_path = #{imgPath} where id = #{userId}
+    </update>
 </mapper>
