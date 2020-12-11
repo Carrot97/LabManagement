@@ -20,10 +20,12 @@ public interface UserMapper {
     User getUserByName(String username);
 
     // 按邮箱查找*一个*用户
-    User getUserByEmail(String email);
+    User getUserByEmail(String oldEmail, String newEmail);
 
     // 按手机号查找*一个*用户
-    User getUserByPhoneNumber(String phoneNumber);
+    User getUserByPhoneNumber(String oldPhoneNumber, String newPhoneNumber);
 
     Boolean updatePortrait(User user);
+
+    Boolean updateUser(User user);
 }

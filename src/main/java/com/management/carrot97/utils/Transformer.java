@@ -11,18 +11,32 @@ import java.util.List;
 public class Transformer {
 
     // 原始用户 转 正式用户
-    public static User originalUser2User(OriginalUser oUser) throws ParseException {
+    public static User originalUser2User(Integer id, OriginalUser oUser) throws ParseException {
         // 默认年份2020
         // 仅适应输入，知道月日就可以（祝生日快乐了），没必要知道年龄（知道也不好）
         String birthday = "2020-" + oUser.getBirthday();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date date = format.parse(birthday);
-        return new User(oUser.getUsername(),
+        return new User(id,
+                oUser.getUsername(),
                 oUser.getPassword1(),
                 date,
                 oUser.getDegree(),
                 oUser.getEmail(),
                 oUser.getPhoneNumber());
+    }
+
+    // 正式用户 转 原始用户
+    public static OriginalUser User2originalUser(User user) {
+        SimpleDateFormat format = new SimpleDateFormat("MM-dd");
+        String birthday = format.format(user.getBirthday());
+        return new OriginalUser(user.getUserName(),
+                null,
+                null,
+                birthday,
+                user.getdegree(),
+                user.getEmail(),
+                user.getPhoneNumber());
     }
 
     // 活动时间格式转换
@@ -43,4 +57,6 @@ public class Transformer {
             activityTimeTransform(activities.get(i));
         }
     }
+
+
 }

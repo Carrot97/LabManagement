@@ -5,10 +5,12 @@ import com.management.carrot97.bean.User;
 import com.management.carrot97.constant.StringConstants;
 import com.management.carrot97.service.UserService;
 import com.management.carrot97.constant.BooleanConstants;
+import com.management.carrot97.utils.Transformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +23,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-
+    /*********************登录************************/
     /*获取登录页面*/
     @GetMapping(value = "/user/login")
     public String getLogin() {
@@ -51,7 +53,7 @@ public class UserController {
         }
     }
 
-
+    /*********************注销************************/
     /*注销操作*/
     @GetMapping(value = "/user/logout")
     public String logout(HttpSession session) {
@@ -61,7 +63,7 @@ public class UserController {
         return "redirect:/activity/recent";
     }
 
-
+    /*********************注册************************/
     /*获取注册页面*/
     @GetMapping(value = "/user/register")
     public String getRegister() {
@@ -76,7 +78,7 @@ public class UserController {
      * 3.若不成功则返回注册页面，并回显用户和错误信息
      */
     @PostMapping(value = "/user/register")
-    public String PostRegister(OriginalUser originalUser,
+    public String doRegister(OriginalUser originalUser,
                                Map<String, Object> map) {
 //        System.out.println(originalUser);
         // 1.验证并添加用户
@@ -94,7 +96,50 @@ public class UserController {
         }
     }
 
+    /*********************修改个人信息************************/
+    // 跳转至个人信息页面
+    @GetMapping(value = "/user/update")
+    public String getUpdatePage(Map<String, Object> map,
+                                HttpSession session) {
+        User user = (User) session.getAttribute(StringConstants.LOGINUSER);
+        OriginalUser oUser = Transformer.User2originalUser(user);
+        map.put("user", oUser);
+        return "user/update_info";
+    }
 
+    /**
+     * 修改个人信息
+     * 1.验证并添加用户--得到状态反馈信息
+     * 2.若成功则将新用户信息保存如session，并重定向至个人信息页面
+     * 3.若失败则将返回个人信息页面，并回显错误信息
+     */
+    @PutMapping(value = "/user/register")
+    public String updateUser(OriginalUser originalUser,
+                             Map<String, Object> map,
+                             HttpSession session) {
+//        System.out.println(originalUser);
+        User user = (User) session.getAttribute(StringConstants.LOGINUSER);
+        // 1.验证并添加用户--得到状态反馈信息
+        Map<String, Object> msg = userService.verifyAndUpdateUser(user, originalUser);
+//        System.out.println("验证完成");
+//        System.out.println(msg.toString());
+        // 2.成功则将新用户信息保存如session，并重定向至个人信息页面
+        if (msg.get(StringConstants.VERIFYSTATUS).equals(BooleanConstants.AVAILABLE)) {
+//            System.out.println("开始更新session");
+            User newUser = (User) msg.get("newUser");
+            session.setAttribute(StringConstants.LOGINUSER, newUser);
+//            System.out.println("session更新完成");
+            return "redirect:/user/update";
+        } else {
+            // 3.若失败则将返回个人信息页面，并回显错误信息
+            map.put(StringConstants.FEEDBACKMSG, msg.get(StringConstants.ERRORMESSAGE));
+            map.put("user", originalUser);
+            return "user/update_info";
+        }
+    }
+
+
+    /*********************更换头像************************/
     /*获取更换头像页面*/
     @GetMapping(value = "/portrait")
     public String getPortraitChange() {

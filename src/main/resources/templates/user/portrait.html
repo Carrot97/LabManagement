@@ -18,7 +18,8 @@
         <h2 class="subtitle">上传头像</h2>
         <form th:action="@{/portrait}" class="add-box form-group" method="post" enctype="multipart/form-data">
             <input type="file" id="exampleInputFile" name="file">
-            <p class="help-block">图片最大限制：5MB</p>
+            <p class="help-block">图片最大限制：5MB<br/>
+                暂不支持剪裁，请上传正方形图片</p>
             <button class="btn btn-primary" type="submit">上传</button>
             <span id="msg" th:text="${msg}"></span>
         </form>

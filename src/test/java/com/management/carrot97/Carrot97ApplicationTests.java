@@ -1,10 +1,7 @@
 package com.management.carrot97;
 
 import com.github.pagehelper.PageInfo;
-import com.management.carrot97.bean.Activity;
-import com.management.carrot97.bean.OriginalUser;
-import com.management.carrot97.bean.Page;
-import com.management.carrot97.bean.User;
+import com.management.carrot97.bean.*;
 import com.management.carrot97.mapper.ActivityMapper;
 import com.management.carrot97.mapper.UserMapper;
 import com.management.carrot97.service.ActivityService;
@@ -27,15 +24,28 @@ import java.util.Map;
 public class Carrot97ApplicationTests {
 
     @Autowired
-    ActivityMapper activityMapper;
+    UserMapper userMapper;
 
     @Autowired
-    ActivityService activityService;
+    UserService userService;
 
     @Test
-    public void contextLoads() {
-        PageInfo<Activity> pageInfo = activityService.getPage(new Page(1), null);
-        System.out.println(pageInfo);
+    public void contextLoads() throws ParseException {
+        User oldUser = Transformer.originalUser2User(1, new OriginalUser("李旭辉",
+                "yyws0317.",
+                "yyws0317.",
+                "04-13",
+                 Degree.MASTER,
+                "lixuhuiustb@163.com",
+                "18612099318"));
+        OriginalUser originalUser = new OriginalUser("李旭辉",
+                "yyws0413.",
+                "yyws0413.",
+                "04-13",
+                Degree.MASTER,
+                "lixuhuiustb@163.com",
+                "18612099318");
+        System.out.println(userService.verifyAndUpdateUser(oldUser, originalUser));
     }
 
     @Test

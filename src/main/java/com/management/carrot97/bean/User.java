@@ -77,20 +77,40 @@ public class User {
                 Privilege.USER);
     }
 
+    /**
+     * 注册时构造函数3
+     * 在2的基础上添加id
+     */
+    public User(Integer id, String userName, String password, Date birthday, Degree degree, String email, String phoneNumber) {
+        this(id,
+            userName,
+            password,
+            birthday,
+            "default",
+            degree,
+            email,
+            phoneNumber,
+            Privilege.USER);
+    }
+
     /***
      *  提取时构造器
      *  默认用户权限为user
      */
     public User(Integer userId, String userName, String password, Date birthday, String imgPath, Degree degree, String email, String phoneNumber) {
         this(userId,
-             userName,
-             password,
-             birthday,
-             imgPath,
-             degree,
-             email,
-             phoneNumber,
-             Privilege.USER);
+            userName,
+            password,
+            birthday,
+            imgPath,
+            degree,
+            email,
+            phoneNumber,
+            Privilege.USER);
+    }
+
+    public User() {
+        this(1, null,null,null,null,null,null,null,null);
     }
 
     @Override

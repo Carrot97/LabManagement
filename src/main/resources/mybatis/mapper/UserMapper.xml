@@ -16,14 +16,20 @@
         <result property="privilege" column="privilege" javaType="com.management.carrot97.bean.Privilege"/>
     </resultMap>
 
-    <!--    User getOneUserByEmail(String email);-->
+    <!--    User getOneUserByEmail(String oldEmail, String newEmail);-->
     <select id="getUserByEmail" resultMap="myUser">
-        select * from `user` where email=#{email} limit 1
+        select * from `user`
+        where <if test="oldEmail!=null">email!=#{oldEmail} and </if>
+              email=#{newEmail}
+        limit 1
     </select>
 
-    <!--    User getOneUserByPhoneNumber(String phoneNumber);-->
+    <!--    User getOneUserByPhoneNumber(String oldPhoneNumber, String newPhoneNumber);-->
     <select id="getUserByPhoneNumber" resultMap="myUser">
-        select * from `user` where phone=#{phoneNumber} limit 1
+        select * from `user`
+        where  <if test="oldPhoneNumber!=null">phone!=#{oldPhoneNumber} and </if>
+              phone=#{newPhoneNumber}
+        limit 1
     </select>
 
     <!--    void addOneUser(User user);-->
@@ -36,4 +42,17 @@
     <update id="updatePortrait">
         update `user` set img_path = #{imgPath} where id = #{userId}
     </update>
+
+    <!--Boolean updateUser(User user);-->
+    <update id="updateUser">
+        update `user`
+        set name = #{userName},
+            password = #{password},
+            birthday = #{birthday},
+            degree = #{degree},
+            email = #{email},
+            phone = #{phoneNumber}
+        where id = #{userId}
+    </update>
+
 </mapper>

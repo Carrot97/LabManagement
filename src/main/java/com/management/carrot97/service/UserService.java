@@ -38,7 +38,7 @@ public class UserService {
             // 验证成功，转换用户类型并保存
             User user = null;
             try {
-                user = Transformer.originalUser2User(oUser);
+                user = Transformer.originalUser2User(null, oUser);
             } catch (ParseException e) {
 //                System.out.println("用户转换失败");
                 msg.put(StringConstants.VERIFYSTATUS, BooleanConstants.UNAVAILABLE);
@@ -56,7 +56,53 @@ public class UserService {
         return msg;
     }
 
+    /**
+     * 验证并更新用户
+     * 1.验证用户信息的可用性（合法和是否被占用）
+     * 2.若验证成功则进行类型转换（原始用户->用户），转换失败回显错误信息
+     * 3.验证成功则更新用户，更新失败回显错误信息
+     * Map中返回添加状态（成功或失败）、失败信息和更新的用户
+     */
+    public Map<String, Object> verifyAndUpdateUser(User user, OriginalUser oUser) {
+        // 验证用户信息的可用性
+        Map<String, Object> msg = verifyUser(user, oUser);
+        if (msg.get(StringConstants.VERIFYSTATUS).equals(BooleanConstants.AVAILABLE)) {
+            // 验证成功，转换用户类型并保存
+            User newUser = null;
+            try {
+                newUser = Transformer.originalUser2User(user.getUserId(), oUser);
+            } catch (ParseException e) {
+//                System.out.println("用户转换失败");
+                msg.put(StringConstants.VERIFYSTATUS, BooleanConstants.UNAVAILABLE);
+                msg.put(StringConstants.ERRORMESSAGE, StringConstants.TRANSFORMERROR);
+            }
+            // 更新用户
+            if (msg.get(StringConstants.VERIFYSTATUS).equals(BooleanConstants.AVAILABLE)) {
+//                System.out.println("开始更新用户信息");
+                boolean result = updateUser(newUser);
+                if (!result) {
+                    msg.put(StringConstants.VERIFYSTATUS, BooleanConstants.UNAVAILABLE);
+                    msg.put(StringConstants.ERRORMESSAGE, StringConstants.UPDATEFAILED);
+                }
+            }
+            if (msg.get(StringConstants.VERIFYSTATUS).equals(BooleanConstants.AVAILABLE)) {
+                msg.put("newUser", newUser);
+            }
+        }
+        return msg;
+    }
+
+    public boolean updateUser(User user) {
+        Boolean result = userMapper.updateUser(user);
+        return result;
+    }
+
     public Map<String, Object> verifyUser(OriginalUser oUser) {
+        Map<String, Object> msg = verifyUser(new User(), oUser);
+        return msg;
+    }
+
+    public Map<String, Object> verifyUser(User user, OriginalUser oUser) {
         Map<String, Object> msg = new HashMap<>();
         msg.put(StringConstants.VERIFYSTATUS, BooleanConstants.UNAVAILABLE);
         // 验证用户名
@@ -92,7 +138,7 @@ public class UserService {
         }
         // 验证数据库中是否存在
         if (!msg.containsKey(StringConstants.ERRORMESSAGE)
-                && userMapper.getUserByEmail(oUser.getEmail()) != null) {
+                && userMapper.getUserByEmail(user.getEmail(), oUser.getEmail()) != null) {
             msg.put(StringConstants.ERRORMESSAGE, StringConstants.EMAILOCCUPIED);
         }
 
@@ -104,7 +150,7 @@ public class UserService {
         }
         // 验证数据库中是否存在
         if (!msg.containsKey(StringConstants.ERRORMESSAGE)
-                && userMapper.getUserByPhoneNumber(oUser.getPhoneNumber()) != null) {
+                && userMapper.getUserByPhoneNumber(user.getPhoneNumber(), oUser.getPhoneNumber()) != null) {
             msg.put(StringConstants.ERRORMESSAGE, StringConstants.PHONEOCCUPIED);
         }
 
@@ -133,13 +179,13 @@ public class UserService {
         // 取出用户比较密码
         if (available) {
             if (isEmail) {
-                user = userMapper.getUserByEmail(username);
-                if (!user.getPassword().equals(password)) {
+                user = userMapper.getUserByEmail(null, username);
+                if (user !=null && !password.equals(user.getPassword())) {
                     user = null;
                 }
             } else if (isPhoneNumber) {
-                user = userMapper.getUserByPhoneNumber(username);
-                if (!user.getPassword().equals(password)) {
+                user = userMapper.getUserByPhoneNumber(null, username);
+                if (user != null && !password.equals(user.getPassword())) {
                     user = null;
                 }
             }

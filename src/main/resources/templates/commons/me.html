@@ -33,10 +33,10 @@
             <ul class="nav nav-tabs">
                 <li role="presentation" th:class="${subActiveUri=='myActivity'?'active':''}">
                     <a th:href="@{/activity/user(pageNumber=1,pageSize=5)}">我的活动</a></li>
-                <li role="presentation" th:class="${subActiveUri=='myBill'?'active':''}">
-                    <a href="#">我的帐单</a></li>
                 <li role="presentation" th:class="${subActiveUri=='personalData'?'active':''}">
-                    <a href="#">个人资料</a></li>
+                    <a th:href="@{/user/update}">个人资料</a></li>
+                <li role="presentation" th:class="${subActiveUri=='myBill'?'active disabled':'disabled'}">
+                    <a href="#">我的帐单</a></li>
             </ul>
         </div>
         <!--        <hr style="background-color: #a7a7a7; height: 1px;border: none"/>-->
