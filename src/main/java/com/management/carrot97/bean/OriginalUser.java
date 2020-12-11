@@ -1,18 +1,30 @@
 package com.management.carrot97.bean;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 public class OriginalUser {
+
     private String username;
+
     private String password1;
+
     private String password2;
-    private String birthday;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birthday;
+
     private Degree degree;
+
     private String email;
+
     private String phoneNumber;
 
     public OriginalUser() {
     }
 
-    public OriginalUser(String username, String password1, String password2, String birthday, Degree degree, String email, String phoneNumber) {
+    public OriginalUser(String username, String password1, String password2, Date birthday, Degree degree, String email, String phoneNumber) {
         this.username = username;
         this.password1 = password1;
         this.password2 = password2;
@@ -59,11 +71,11 @@ public class OriginalUser {
         this.password2 = password2;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 

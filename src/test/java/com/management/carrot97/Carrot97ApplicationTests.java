@@ -31,21 +31,6 @@ public class Carrot97ApplicationTests {
 
     @Test
     public void contextLoads() throws ParseException {
-        User oldUser = Transformer.originalUser2User(1, new OriginalUser("李旭辉",
-                "yyws0317.",
-                "yyws0317.",
-                "04-13",
-                 Degree.MASTER,
-                "lixuhuiustb@163.com",
-                "18612099318"));
-        OriginalUser originalUser = new OriginalUser("李旭辉",
-                "yyws0413.",
-                "yyws0413.",
-                "04-13",
-                Degree.MASTER,
-                "lixuhuiustb@163.com",
-                "18612099318");
-        System.out.println(userService.verifyAndUpdateUser(oldUser, originalUser));
     }
 
     @Test

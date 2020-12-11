@@ -55,8 +55,8 @@
             </div>
             <!--生日-->
             <div class="form-group">
-                <input type="text" name="birthday" class="form-control" id="inputBirthday"
-                       placeholder="01-01(月-日)注意：不需要年份" th:value="${user!=null?user.getBirthday():''}">
+                <input type="date" name="birthday" class="form-control" id="inputBirthday"
+                       th:value="${user!=null?#dates.format(user.birthday, 'yyyy-MM-dd'):''}">
             </div>
             <!--电子邮箱-->
             <div class="form-group">

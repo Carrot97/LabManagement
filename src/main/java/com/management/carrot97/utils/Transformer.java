@@ -12,15 +12,10 @@ public class Transformer {
 
     // 原始用户 转 正式用户
     public static User originalUser2User(Integer id, OriginalUser oUser) throws ParseException {
-        // 默认年份2020
-        // 仅适应输入，知道月日就可以（祝生日快乐了），没必要知道年龄（知道也不好）
-        String birthday = "2020-" + oUser.getBirthday();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = format.parse(birthday);
         return new User(id,
                 oUser.getUsername(),
                 oUser.getPassword1(),
-                date,
+                oUser.getBirthday(),
                 oUser.getDegree(),
                 oUser.getEmail(),
                 oUser.getPhoneNumber());
@@ -28,12 +23,10 @@ public class Transformer {
 
     // 正式用户 转 原始用户
     public static OriginalUser User2originalUser(User user) {
-        SimpleDateFormat format = new SimpleDateFormat("MM-dd");
-        String birthday = format.format(user.getBirthday());
         return new OriginalUser(user.getUserName(),
                 null,
                 null,
-                birthday,
+                user.getBirthday(),
                 user.getdegree(),
                 user.getEmail(),
                 user.getPhoneNumber());

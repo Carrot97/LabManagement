@@ -79,8 +79,8 @@ public class UserController {
      */
     @PostMapping(value = "/user/register")
     public String doRegister(OriginalUser originalUser,
-                               Map<String, Object> map) {
-//        System.out.println(originalUser);
+                             Map<String, Object> map) {
+        System.out.println(originalUser);
         // 1.验证并添加用户
         Map<String, Object> msg = userService.verifyAndAddUser(originalUser);
         // 2.若返回状态为成功，则重定向至登录页面

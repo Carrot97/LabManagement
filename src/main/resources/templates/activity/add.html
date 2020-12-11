@@ -43,8 +43,8 @@
                 </div>
                 <!--开始时间-->
                 <div class="form-group">
-                    <input type="text" name="startTime" class="form-control" id="inputStartTime"
-                           placeholder="开始时间(2020-01-01 17:00:00)" th:value="${activity!=null?#dates.format(activity.startTime, 'yyyy-MM-dd HH:mm:ss'):''}">
+                    <input type="datetime-local" name="startTime" class="form-control" id="inputStartTime"
+                           th:value="${activity!=null?activity.dateTransform:''}">
                 </div>
                 <!--预计耗时-->
                 <div class="form-group">

@@ -1,8 +1,10 @@
 package com.management.carrot97.bean;
 
+import com.alibaba.druid.sql.PagerUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Activity implements Serializable {
@@ -12,7 +14,7 @@ public class Activity implements Serializable {
 
     private String host;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date startTime;
 
     private Integer span;
@@ -102,13 +104,13 @@ public class Activity implements Serializable {
         }
         Activity other = (Activity) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-            && (this.getHost() == null ? other.getHost() == null : this.getHost().equals(other.getHost()))
-            && (this.getStartTime() == null ? other.getStartTime() == null : this.getStartTime().equals(other.getStartTime()))
-            && (this.getSpan() == null ? other.getSpan() == null : this.getSpan().equals(other.getSpan()))
-            && (this.getLocation() == null ? other.getLocation() == null : this.getLocation().equals(other.getLocation()))
-            && (this.getExpense() == null ? other.getExpense() == null : this.getExpense().equals(other.getExpense()))
-            && (this.getDetails() == null ? other.getDetails() == null : this.getDetails().equals(other.getDetails()));
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getHost() == null ? other.getHost() == null : this.getHost().equals(other.getHost()))
+                && (this.getStartTime() == null ? other.getStartTime() == null : this.getStartTime().equals(other.getStartTime()))
+                && (this.getSpan() == null ? other.getSpan() == null : this.getSpan().equals(other.getSpan()))
+                && (this.getLocation() == null ? other.getLocation() == null : this.getLocation().equals(other.getLocation()))
+                && (this.getExpense() == null ? other.getExpense() == null : this.getExpense().equals(other.getExpense()))
+                && (this.getDetails() == null ? other.getDetails() == null : this.getDetails().equals(other.getDetails()));
     }
 
     @Override
@@ -143,5 +145,11 @@ public class Activity implements Serializable {
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
+    }
+
+    public String dateTransform() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+        String strDate = format.format(startTime);
+        return strDate;
     }
 }

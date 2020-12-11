@@ -16,7 +16,7 @@
            th:text="${timeout?act.name+'(已过期)':act.name}"
            th:style="${timeout?'text-decoration:line-through':''}"></p>
         <p class="activityTime">
-            <span class="important" th:text="${#dates.format(act.startTime, 'yyyy-MM-dd HH:mm:ss E')}"
+            <span class="important" th:text="${#dates.format(act.startTime, 'yyyy-MM-dd HH:mm E')}"
                   th:style="${timeout?'color:#b73737':''}"></span>
             ，预计持续
             <span class="important" th:text="${act.span}"></span>
@@ -53,7 +53,7 @@
                    th:text="${timeout?act.name+'(已过期)':act.name}"
                    th:style="${timeout?'text-decoration:line-through':''}"></p>
                 <p class="activityTime">
-            <span class="important" th:text="${#dates.format(act.startTime, 'yyyy-MM-dd HH:mm:ss E')}"
+            <span class="important" th:text="${#dates.format(act.startTime, 'yyyy-MM-dd HH:mm E')}"
                   th:style="${timeout?'color:#b73737':''}"></span>
                     ，预计持续
                     <span class="important" th:text="${act.span}"></span>
