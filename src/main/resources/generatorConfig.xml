@@ -20,7 +20,7 @@
         <!--数据库链接URL，用户名、密码 -->
         <jdbcConnection
                 driverClass="com.mysql.cj.jdbc.Driver"
-                connectionURL="jdbc:mysql://localhost:3306/cxymanagement?serverTimezone=UTC"
+                connectionURL="jdbc:mysql://222.28.68.16:3306/cxymanagement?serverTimezone=UTC"
                 userId="root"
                 password="123456">
         </jdbcConnection>
@@ -49,7 +49,7 @@
         </javaClientGenerator>
 
         <!-- 要生成哪些表 -->
-        <table tableName="activity" domainObjectName="Activity"
+        <table tableName="chuangsbill" domainObjectName="ChuangsBill"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

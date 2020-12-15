@@ -3,8 +3,8 @@ package com.management.carrot97.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.management.carrot97.bean.Activity;
-import com.management.carrot97.bean.Page;
 import com.management.carrot97.constant.BooleanConstants;
+import com.management.carrot97.constant.NumberConstants;
 import com.management.carrot97.constant.StringConstants;
 import com.management.carrot97.mapper.ActivityMapper;
 import com.management.carrot97.utils.StringVerify;
@@ -31,8 +31,8 @@ public class ActivityService {
 
     // 获取指定用户的分页
     // 若未指定则获取全部活动的分页
-    public PageInfo<Activity> getPage(Page page, String username) {
-        PageHelper.startPage(page.getPageNumber(), page.getPageSize());
+    public PageInfo<Activity> getPage(Integer pageNumber, String username) {
+        PageHelper.startPage(pageNumber, NumberConstants.ACTIVITYPAGESIZE);
         List<Activity> activities = activityMapper.selectPage(username);
         PageInfo<Activity> pageInfo = new PageInfo<>(activities);
         return pageInfo;

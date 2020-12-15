@@ -2,7 +2,6 @@ package com.management.carrot97.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.management.carrot97.bean.Activity;
-import com.management.carrot97.bean.Page;
 import com.management.carrot97.bean.User;
 import com.management.carrot97.constant.BooleanConstants;
 import com.management.carrot97.constant.StringConstants;
@@ -33,9 +32,9 @@ public class ActivityController {
 
     // 获得全部活动分页（默认一页10个）
     @GetMapping(value = "/activity/all")
-    public String getActivities(Page page,
+    public String getActivities(@RequestParam("pageNumber") Integer pageNumber,
                                 Map<String, Object> map) {
-        PageInfo<Activity> pageInfo = activityService.getPage(page, null);
+        PageInfo<Activity> pageInfo = activityService.getPage(pageNumber, null);
         map.put("pageInfo", pageInfo);
         return "activity/all";
     }
@@ -46,11 +45,11 @@ public class ActivityController {
      * 2.点击次级导航栏‘我的活动’进入我的活动
      */
     @GetMapping(value = "/activity/user")
-    public String getPersonalActivities(Page page,
+    public String getPersonalActivities(@RequestParam("pageNumber") Integer pageNumber,
                                         Map<String, Object> map,
                                         HttpSession session) {
         User loginUser = (User) session.getAttribute(StringConstants.LOGINUSER);
-        PageInfo<Activity> pageInfo = activityService.getPage(page, loginUser.getUserName());
+        PageInfo<Activity> pageInfo = activityService.getPage(pageNumber, loginUser.getUserName());
         map.put("pageInfo", pageInfo);
         return "user/activity";
     }

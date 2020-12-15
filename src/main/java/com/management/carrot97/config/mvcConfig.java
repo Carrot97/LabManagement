@@ -22,7 +22,8 @@ public class mvcConfig implements WebMvcConfigurer {
                         /*登录页面*/"/", "/login", "/user/login",
                         /*注册页面*/"/user/register",
                         /*最近活动页面*/"/activity/recent",
-                        /*全部活动页面*/"/activity/all");
+                        /*全部活动页面*/"/activity/all",
+                        /*集体账单页面*/"/chuangsBill/list");
     }
 
 }

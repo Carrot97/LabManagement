@@ -9,7 +9,7 @@ spring:
   datasource:
     username: "root"
     password: "123456"
-    url: jdbc:mysql://localhost:3306/cxymanagement?serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://222.28.68.16:3306/cxymanagement?serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     initialSize: 5

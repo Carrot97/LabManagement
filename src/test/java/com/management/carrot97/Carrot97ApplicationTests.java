@@ -5,6 +5,7 @@ import com.management.carrot97.bean.*;
 import com.management.carrot97.mapper.ActivityMapper;
 import com.management.carrot97.mapper.UserMapper;
 import com.management.carrot97.service.ActivityService;
+import com.management.carrot97.service.ChuangsBillService;
 import com.management.carrot97.service.UserService;
 import com.management.carrot97.utils.StringVerify;
 import com.management.carrot97.utils.Transformer;
@@ -27,10 +28,12 @@ public class Carrot97ApplicationTests {
     UserMapper userMapper;
 
     @Autowired
-    UserService userService;
+    ChuangsBillService chuangsBillService;
 
     @Test
-    public void contextLoads() throws ParseException {
+    public void contextLoads() {
+//        PageInfo<ChuangsBill> page = chuangsBillService.getPage(new Page(1));
+//        System.out.println(page.getList().toString());
     }
 
     @Test
