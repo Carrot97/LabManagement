@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>集体账单 · 创新苑</title>
+    <th:block th:include="commons/header::header"/>
+    <link th:href="@{assets/css/chuangsBill/list.css}" rel="stylesheet">
+</head>
+<body>
+<!--导航栏-->
+<div th:replace="commons/base::navbar(activeUri='chuangsBill')"></div>
+<div class="main shadow">
+    <p class="subtitle">集体账单</p>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>日期</th>
+                <th>收支类型</th>
+                <th>金额</th>
+                <th>来源</th>
+                <th>经办人</th>
+                <th>事由</th>
+                <th>结余</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2020-12-15</td>
+                    <td>支出</td>
+                    <td>48</td>
+                    <td></td>
+                    <td>李旭辉</td>
+                    <td>买水</td>
+                    <td>768.5</td>
+                </tr>
+<!--            <tr th:each="bill:${bills}">-->
+<!--                <td th:text="${act.id}"></td>-->
+<!--                <td th:text="${act.name}"></td>-->
+<!--                <td th:text="${act.location}"></td>-->
+<!--                <td th:text="${act.expense}"></td>-->
+<!--                <td th:text="${act.host}"></td>-->
+<!--                <td th:text="${#dates.format(act.startTime, 'yyyy-MM-dd HH:mm:ss E')}"></td>-->
+<!--                <td th:text="${act.span}"></td>-->
+<!--            </tr>-->
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
