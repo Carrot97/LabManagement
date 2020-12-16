@@ -3,6 +3,7 @@ package com.management.carrot97;
 import com.github.pagehelper.PageInfo;
 import com.management.carrot97.bean.*;
 import com.management.carrot97.mapper.ActivityMapper;
+import com.management.carrot97.mapper.ChuangsBillMapper;
 import com.management.carrot97.mapper.UserMapper;
 import com.management.carrot97.service.ActivityService;
 import com.management.carrot97.service.ChuangsBillService;
@@ -25,15 +26,15 @@ import java.util.Map;
 public class Carrot97ApplicationTests {
 
     @Autowired
-    UserMapper userMapper;
+    ChuangsBillMapper chuangsBillMapper;
 
     @Autowired
     ChuangsBillService chuangsBillService;
 
     @Test
     public void contextLoads() {
-//        PageInfo<ChuangsBill> page = chuangsBillService.getPage(new Page(1));
-//        System.out.println(page.getList().toString());
+        Double balance = chuangsBillMapper.selectLatestBalance();
+        System.out.println(balance);
     }
 
     @Test

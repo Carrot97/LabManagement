@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加账单 · 创新苑</title>
+    <th:block th:include="commons/header::header"/>
+    <link th:href="@{/assets/css/add.css}" rel="stylesheet">
+</head>
+<body>
+<!--导航栏-->
+<div th:replace="commons/base::navbar(activeUri='chuangsBill')"></div>
+<div class="main shadow">
+    <div class="add-box">
+        <div style="text-align: center; margin-bottom: 50px">
+            <h1 th:text="${update==null?'添加账单':'修改账单'}"></h1>
+        </div>
+        <div class="left-box" style="text-align: right">
+            <br/>
+            <h4>日期</h4><br/>
+            <h4>收支</h4><br/>
+            <h4>金额</h4><br/>
+            <h4 class="sourceDiv">来源</h4><br class="sourceDiv"/>
+            <h4 class="agentDiv">经办人</h4><br/>
+            <h4 class="reasonDiv">事由</h4><br/>
+        </div>
+        <div class="right-box">
+            <form class="form-add" th:action="@{/chuangsBill/}" method="post">
+                <!--支持PUT请求-->
+                <input type="hidden" name="_method" value="put" th:if="${update}!=null">
+                <!--修改时按照id检索-->
+                <input type="hidden" name="id" th:value="${update!=null?bill.id:''}">
+                <!--日期-->
+                <div class="form-group">
+                    <input type="date" name="date" class="form-control"
+                           th:value="${bill!=null?#dates.format(bill.date, 'yyyy-MM-dd'):''}">
+                </div>
+                <!--收支-->
+                <div class="form-group single-select">
+                    <label class="radio-inline">
+                        <input type="radio" name="type" value="-1" id="incomeType"
+                               th:attr="checked=${bill!=null and bill.type==-1?true:false}"> 收入
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="type" value="1" id="expenseType"
+                               th:attr="checked=${bill!=null and bill.type==1?true:false}"> 支出
+                    </label>
+                </div>
+                <!--金额-->
+                <div class="form-group">
+                    <input type="number" name="amount" class="form-control"
+                           placeholder="金额(元)" th:value="${bill!=null?bill.amount:''}">
+                </div>
+                <!--来源-->
+                <div class="form-group sourceDiv">
+                    <input type="text" name="source" class="form-control"
+                           placeholder="来源" th:value="${bill!=null?bill.source:''}">
+                </div>
+                <!--经办人-->
+                <div class="form-group agentDiv">
+                    <input type="text" name="agent" class="form-control"
+                           placeholder="经办人" th:value="${bill!=null?bill.agent:''}">
+                </div>
+                <!--事由-->
+                <div class="form-group reasonDiv">
+                    <input type="text" name="reason" class="form-control"
+                           placeholder="事由" th:value="${bill!=null?bill.reason:''}">
+                </div>
+                <button th:class="${update==null?'btn btn-success':'btn btn-warning'}" class="btn btn-primary"
+                        type="submit" th:text="${update==null?'发布':'修改'}"></button>
+                <span id="msg" th:text="${msg}"></span>
+<!--                <p class="mt-5 mb-3 text-muted text-center"></p>-->
+            </form>
+        </div>
+    </div>
+</div>
+<script th:src="@{/assets/js/bill_type_handler.js}"></script>
+</body>
+</html>

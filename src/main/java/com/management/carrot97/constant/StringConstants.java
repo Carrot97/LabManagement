@@ -50,6 +50,13 @@ public class StringConstants {
 
     public static final String NULLFILE = "上传文件为空，请重新上传";
 
+    public static final String NULLDATE = "日期未选择";
+
+    public static final String NULLTYPE = "类型未选择";
+
+    public static final String ILLEGALAMOUNT = "金额为空或为负";
+
+
     /*占用错误*/
     public static final String EMAILOCCUPIED = "该邮箱已被占用";
 

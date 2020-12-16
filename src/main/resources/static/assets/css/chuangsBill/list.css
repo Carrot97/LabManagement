@@ -7,3 +7,10 @@
     padding: 0 20px;
     font-size: 15px;
 }
+
+.add-button {
+    position: relative;
+    float: right;
+    right: 40px;
+    top: 20px;
+}
