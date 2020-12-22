@@ -9,12 +9,17 @@ import com.management.carrot97.constant.StringConstants;
 import com.management.carrot97.mapper.ActivityMapper;
 import com.management.carrot97.utils.StringVerify;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CacheConfig(cacheNames = "activity")
 @Service
 public class ActivityService {
 
@@ -31,7 +36,9 @@ public class ActivityService {
 
     // 获取指定用户的分页
     // 若未指定则获取全部活动的分页
+    @Cacheable(keyGenerator = "myKeyGenerator", condition = "#a1==null")
     public PageInfo<Activity> getPage(Integer pageNumber, String username) {
+        System.out.println("查询全部活动");
         PageHelper.startPage(pageNumber, NumberConstants.ACTIVITYPAGESIZE);
         List<Activity> activities = activityMapper.selectPage(username);
         PageInfo<Activity> pageInfo = new PageInfo<>(activities);
@@ -40,7 +47,9 @@ public class ActivityService {
 
 
     // 获取最近10个活动
+    @Cacheable(keyGenerator = "myKeyGenerator")
     public List<Activity> getRecent() {
+        System.out.println("查询最近活动");
         List<Activity> activities = activityMapper.selectRecent();
         return activities;
     }
@@ -93,6 +102,7 @@ public class ActivityService {
      * 2.添加活动
      * Map中返回添加状态（成功或失败）和失败信息
      */
+    @CacheEvict(allEntries = true, beforeInvocation = false)
     public Map<String, Object> verifyAndAdd(Activity activity) {
         // 验证活动
         Map<String, Object> msg = verifyActivity(activity);
@@ -112,6 +122,7 @@ public class ActivityService {
      * 2.更新活动
      * Map中返回添加状态（成功或失败）和失败信息
      */
+    @CacheEvict(allEntries = true, beforeInvocation = false)
     public Map<String, Object> verifyAndUpdate(Activity activity) {
         Map<String, Object> msg = verifyActivity(activity);
         if (msg.get(StringConstants.VERIFYSTATUS).equals(BooleanConstants.AVAILABLE)) {
@@ -124,6 +135,7 @@ public class ActivityService {
         return msg;
     }
 
+    @CacheEvict(allEntries = true, beforeInvocation = false)
     public Map<String, Object> deleteActivity(Integer activityId) {
         HashMap<String, Object> msg = new HashMap<>();
         msg.put(StringConstants.VERIFYSTATUS, BooleanConstants.AVAILABLE);

@@ -14,6 +14,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.text.ParseException;
@@ -26,30 +28,20 @@ import java.util.Map;
 public class Carrot97ApplicationTests {
 
     @Autowired
-    ChuangsBillMapper chuangsBillMapper;
+    StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    ChuangsBillService chuangsBillService;
+    RedisTemplate redisTemplate;
+
 
     @Test
     public void contextLoads() {
-        Double balance = chuangsBillMapper.selectLatestBalance();
-        System.out.println(balance);
+        System.out.println(stringRedisTemplate.opsForValue().get("msg"));
     }
 
     @Test
     public void test2() throws ParseException {
-//        OriginalUser originalUser = new OriginalUser(
-//                "韩树莹",
-//                "123456",
-//                "123456",
-//                "03-17",
-//                1,
-//                "1041217529@qq.com",
-//                "18612099319");
-//
-//        Map<String, Object> msg = userService.verifyAndAddUser(originalUser);
-//        System.out.println(msg.toString());
+
     }
 
 }

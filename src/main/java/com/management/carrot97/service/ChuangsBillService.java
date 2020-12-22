@@ -9,6 +9,8 @@ import com.management.carrot97.constant.StringConstants;
 import com.management.carrot97.mapper.ChuangsBillMapper;
 import com.management.carrot97.utils.NumberVerify;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
@@ -22,8 +24,9 @@ public class ChuangsBillService {
 
 
     /*********************************基本操作类型*******************************/
-
+    @Cacheable(cacheNames = "chuangsBill", keyGenerator = "myKeyGenerator")
     public PageInfo<ChuangsBill> getPage(Integer pageNumber) {
+        System.out.println("查询集体账单");
         PageHelper.startPage(pageNumber, NumberConstants.BILLPAGESIZE);
         List<ChuangsBill> bills = chuangsBillMapper.selectByPage();
         PageInfo<ChuangsBill> pageInfo = new PageInfo<>(bills);
@@ -83,6 +86,7 @@ public class ChuangsBillService {
      * 2.添加账单
      * Map中返回添加状态（成功或失败）和失败信息
      */
+    @CacheEvict(cacheNames = "chuangsBill", allEntries = true, beforeInvocation = false)
     public Map<String, Object> verifyAndAdd(ChuangsBill bill) {
         Map<String, Object> msg = verifyBill(bill);
         if (msg.get(StringConstants.VERIFYSTATUS).equals(BooleanConstants.AVAILABLE)) {
