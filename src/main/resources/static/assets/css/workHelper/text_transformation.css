@@ -1,0 +1,23 @@
+.text-div {
+    margin-top: 40px;
+    padding-bottom: 70px;
+    overflow: auto;
+}
+.left-box {
+    float: left;
+    width: 500px;
+    padding-left: 70px;
+    padding-right: 40px;
+    /*background: #919191;*/
+}
+.right-box {
+    float: right;
+    width: 500px;
+    padding-left: 40px;
+    padding-right: 70px;
+    /*background: azure;*/
+}
+.text-box {
+    font-size:20px;
+}
+

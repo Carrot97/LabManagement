@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class Transformer {
+public class ObjTransformer {
 
     // 原始用户 转 正式用户
     public static User originalUser2User(Integer id, OriginalUser oUser) throws ParseException {

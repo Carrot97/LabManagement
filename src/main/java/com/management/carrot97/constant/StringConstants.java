@@ -13,7 +13,7 @@ public class StringConstants {
 
 
     /*内部错误*/
-    public static final String TRANSFORMERROR = "用户转换失败,请联系作者";
+    public static final String TRANSFORMERROR = "转换失败,请联系作者";
 
     public static final String ADDFAILED = "添加失败，请联系作者";
 
@@ -26,6 +26,7 @@ public class StringConstants {
     public static final String SAVEFAILD = "文件上传失败，请联系作者";
 
     public static final Object DBUPDATEERROR = "数据库更新错误，请联系作者";
+
 
     /*不合法错误*/
     public static final String ERRORLOGIN = "用户名或密码错误";

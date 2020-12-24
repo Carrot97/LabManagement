@@ -36,16 +36,22 @@
                         <li><a th:href="@{/activity/}">发布活动</a></li>
                     </ul>
                 </li>
+
                 <li th:class="${activeUri=='chuangsBill'?'active':''}">
                     <a th:href="@{/chuangsBill/list(pageNumber=1)}">集体账单</a></li>
+
+                <li th:class="${activeUri=='workHelper'?'active':''}">
+                    <a th:href="@{/work/transform}">文本转换</a></li>
+
                 <li class="disabled"><a href="#">事件通知</a></li>
             </ul>
-            <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="请输入关键字">
-                </div>
-                <button type="submit" class="btn btn-primary">搜索</button>
-            </form>
+
+<!--            <form class="navbar-form navbar-left">-->
+<!--                <div class="form-group">-->
+<!--                    <input type="text" class="form-control" placeholder="请输入关键字">-->
+<!--                </div>-->
+<!--                <button type="submit" class="btn btn-primary">搜索</button>-->
+<!--            </form>-->
             <ul class="nav navbar-nav navbar-right" th:if="${session.loginUser==null}">
                 <li><a th:href="@{/user/login}">登录</a></li>
                 <li><a th:href="@{/user/register}">注册</a></li>

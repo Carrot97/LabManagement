@@ -5,7 +5,7 @@ import com.management.carrot97.bean.User;
 import com.management.carrot97.constant.StringConstants;
 import com.management.carrot97.service.UserService;
 import com.management.carrot97.constant.BooleanConstants;
-import com.management.carrot97.utils.Transformer;
+import com.management.carrot97.utils.ObjTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -102,7 +102,7 @@ public class UserController {
     public String getUpdatePage(Map<String, Object> map,
                                 HttpSession session) {
         User user = (User) session.getAttribute(StringConstants.LOGINUSER);
-        OriginalUser oUser = Transformer.User2originalUser(user);
+        OriginalUser oUser = ObjTransformer.User2originalUser(user);
         map.put("user", oUser);
         return "user/update_info";
     }

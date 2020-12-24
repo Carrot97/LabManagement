@@ -6,7 +6,7 @@ import com.management.carrot97.constant.BooleanConstants;
 import com.management.carrot97.constant.StringConstants;
 import com.management.carrot97.mapper.UserMapper;
 import com.management.carrot97.utils.StringVerify;
-import com.management.carrot97.utils.Transformer;
+import com.management.carrot97.utils.ObjTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
@@ -38,7 +38,7 @@ public class UserService {
             // 验证成功，转换用户类型并保存
             User user = null;
             try {
-                user = Transformer.originalUser2User(null, oUser);
+                user = ObjTransformer.originalUser2User(null, oUser);
             } catch (ParseException e) {
 //                System.out.println("用户转换失败");
                 msg.put(StringConstants.VERIFYSTATUS, BooleanConstants.UNAVAILABLE);
@@ -70,7 +70,7 @@ public class UserService {
             // 验证成功，转换用户类型并保存
             User newUser = null;
             try {
-                newUser = Transformer.originalUser2User(user.getUserId(), oUser);
+                newUser = ObjTransformer.originalUser2User(user.getUserId(), oUser);
             } catch (ParseException e) {
 //                System.out.println("用户转换失败");
                 msg.put(StringConstants.VERIFYSTATUS, BooleanConstants.UNAVAILABLE);

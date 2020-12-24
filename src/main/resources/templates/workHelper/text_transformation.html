@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>文本转换 · 创新苑</title>
+    <th:block th:include="commons/header::header"/>
+    <link th:href="@{/assets/css/workHelper/text_transformation.css}" rel="stylesheet">
+</head>
+<body>
+<!--导航栏-->
+<div th:replace="commons/base::navbar(activeUri='workHelper')"></div>
+<div class="main shadow">
+    <p class="subtitle">文本转换</p>
+    <div class="text-div">
+        <div class="left-box">
+            <textarea class="form-control text-box" rows="13" id="input-box"></textarea>
+<!--            <div contenteditable="true" id="input-box"></div>-->
+        </div>
+        <div class="right-box">
+            <textarea class="form-control text-box" rows="13" id="output-box"></textarea>
+<!--            <div contenteditable="true" id="output-box"></div>-->
+        </div>
+    </div>
+</div>
+<div th:replace="commons/tail::tail"></div>
+<script th:src="@{/assets/js/text_ajax.js}"></script>
+</body>
+</html>
